@@ -1,0 +1,92 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+*.db
+
+# Django migrations
+**/migrations/*
+!**/migrations/__init__.py
+
+# If you are using SQLite
+*.sqlite3
+
+# If you are using MySQL
+*.pyo
+
+# If you are using PostgreSQL
+*.pyo
+
+# If you are using another type of database
+*.pyo
+
+# Ignore virtual environments
+env/
+venv/
+ENV/
+ENV.bak/
+venv.bak/
+
+
+# If you are using VS Code
+.vscode/
+
+# If you are using MacOS
+.DS_Store
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Test coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# My Pytest
+.pytest_cache/
+
+# Django static files
+staticfiles/
+media/
+
+# Django local settings
+local_settings.py
+
+# Other
+*.swp
+*~
+.venv/
+.venv.bak/
+# celery beat schedule file
+celerybeat-schedule
+
+# Profiling data
+.prof
+
+# Honcho/Foreman local environment settings
+.env
