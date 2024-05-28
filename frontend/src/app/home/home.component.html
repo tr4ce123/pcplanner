@@ -4,3 +4,8 @@
     <button mat-icon-button class="example-icon">
         <mat-icon>menu</mat-icon>
 </button>
+</mat-toolbar>
+
+<div *ngFor="let preference of preferences">
+    <p> {{ preference.budget }}</p>
+</div>
