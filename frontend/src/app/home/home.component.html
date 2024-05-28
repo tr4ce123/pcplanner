@@ -9,3 +9,33 @@
 <div *ngFor="let preference of preferences">
     <p> {{ preference.budget }}</p>
 </div>
+
+<div *ngFor="let response of aiResponses">
+    <p> {{ response.response }}</p>
+</div>
+
+<!-- <mat-card>
+    <mat-form-field appearance="outline">
+        <mat-label>
+            Budget
+        </mat-label>
+        <input
+            matInput
+            formControlName="budget"
+            name="budget"
+            required />
+    </mat-form-field>
+</mat-card> -->
+
+<mat-card>
+    <form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Budget</mat-label>
+            <input matInput formControlName="budget" required />
+            <mat-error *ngIf="preferenceForm.get('budget')?.hasError('required')">
+                Budget is required
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+</mat-card>

@@ -20,7 +20,7 @@ class OpenAIView(ModelViewSet):
 
     def create(self, request):
         try:
-            preferences_id = request.data.get("id")
+            preferences_id = request.data.get("preferenceId")
 
             if not preferences_id:
                 return Response(
