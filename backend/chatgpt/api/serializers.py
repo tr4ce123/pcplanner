@@ -5,4 +5,4 @@ from ..models import ChatGPTResponse
 class ChatGPTResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatGPTResponse
-        fields = ("id", "response")
+        fields = ["id", "prompt", "response"]

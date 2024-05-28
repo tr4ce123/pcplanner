@@ -1,46 +1,38 @@
-from rest_framework import viewsets, status
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from rest_framework.decorators import action
-from ..models import ChatGPTResponse
+from rest_framework import status
+from openai import OpenAI
 from .serializers import ChatGPTResponseSerializer
-from pcplanner.models import Preferences
-import openai
+from ..models import ChatGPTResponse
+import os
+from dotenv import load_dotenv
 
-openai.api_key = "your_openai_api_key"
+load_dotenv()
+client = OpenAI(api_key=os.environ["OPENAI_KEY"])
 
 
-class ChatGPTResponseViewSet(viewsets.ModelViewSet):
+class OpenAIView(ModelViewSet):
     queryset = ChatGPTResponse.objects.all()
     serializer_class = ChatGPTResponseSerializer
 
-    @action(detail=False, methods=["post"])
-    def get_pc_parts(self, request):
-        preference_id = request.data.get("preference_id")
-
-        try:
-            preference = Preferences.objects.get(id=preference_id)
-        except Preferences.DoesNotExist:
+    def create(self, request, *args, **kwargs):
+        prompt = request.data.get("prompt")
+        if not prompt:
             return Response(
-                {"error": "Preferences not found for the given ID"},
-                status=status.HTTP_404_NOT_FOUND,
+                {"error": "Prompt is required"}, status=status.HTTP_400_BAD_REQUEST
             )
 
-        prompt = f"Given a budget of ${preference.budget}, recommend the highest performing computer parts without exceeding the budget but getting as close as you can."
-
         try:
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": prompt},
-                ],
+                messages=[{"role": "user", "content": prompt}],
             )
-            result = response.choices[0].message["content"]
-            chatgpt_response = ChatGPTResponse.objects.create(response=result)
-            return Response(
-                ChatGPTResponseSerializer(chatgpt_response).data,
-                status=status.HTTP_200_OK,
+            generated_text = response.choices[0].message.content.strip()
+            chatgpt_response = ChatGPTResponse.objects.create(
+                prompt=prompt, response=generated_text
             )
+            serializer = self.get_serializer(chatgpt_response)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
