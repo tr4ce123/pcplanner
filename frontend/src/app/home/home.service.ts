@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AIResponse, Preferences } from '../models.module';
+import { AIResponse, Computer, Preferences } from '../models.module';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +24,12 @@ export class HomeService {
     return this.http.get<AIResponse[]>(this.apiUrl + 'chatgpt');
   }
 
-  createAIResponse(preferenceId: number): Observable<AIResponse> {
-    return this.http.post<AIResponse>(this.apiUrl + 'chatgpt/', { preferenceId })
+  createAIResponse(preferenceId: number): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'chatgpt/', { preferenceId })
+  }
+
+  getComputers(): Observable<Computer[]> {
+    return this.http.get<Computer[]>(this.apiUrl + 'computers');
   }
 }
 

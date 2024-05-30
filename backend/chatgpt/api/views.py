@@ -2,15 +2,30 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from openai import OpenAI
-from .serializers import ChatGPTResponseSerializer, ComputerSerializer
+from .serializers import (
+    ChatGPTResponseSerializer,
+    ComputerSerializer,
+)
 from ..models import ChatGPTResponse, Component, Computer
 from pcplanner.models import Preferences
 import os
 from dotenv import load_dotenv
-import re
+import re, requests
+from pypartpicker import Scraper
 
 load_dotenv()
 client = OpenAI(api_key=os.environ["OPENAI_KEY"])
+scraperAPI = os.environ["SCRAPER_API_KEY"]
+
+
+def scraperapi_response_retriever(url, **kwargs):
+    scraperapi_url = f"http://api.scraperapi.com/?api_key={scraperAPI}&url={url}"
+    response = requests.get(scraperapi_url, **kwargs)
+    response.raise_for_status()
+    return response
+
+
+pcpp = Scraper(response_retriever=scraperapi_response_retriever)
 
 
 class OpenAIView(ModelViewSet):
@@ -30,7 +45,7 @@ class OpenAIView(ModelViewSet):
             preferences = Preferences.objects.get(id=preferences_id)
             prompt = f"""What are the highest performing computer parts I can buy with a budget of ${preferences.budget}? Give a list of the parts in a numbered list: 1. CPU 2. CPU Cooler 3. GPU 4. Motherboard 5. RAM 6. PSU 7. SSD 8. Case. 
             All of the parts must be compatable with each other. Keep within plus or minus $50 of the given budget. Format it in this way: 1. CPU: Product Name - Price 2. CPU Cooler: Product Name - Price 3. GPU: Product Name - Price 4. Motherboard: Product Name - Price 5. RAM: Product Name - Price 6. PSU: Product Name - Price 7. SSD: Product Name - Price 8. Case: Product Name - Price Total Cost: Price. For example: 1. CPU: AMD Ryzen 5 3600 - $199.99.
-            Use parts that are the most recent as possible unless the budget is lower. Try not to suggest things that have been released before 2020."""
+            Use parts that are the most recent as possible unless the budget is lower. Try not to suggest things that have been released before 2020. Don't give a brand, just give the component but adding AMD or Intel or Nvidia is okay just not different sellers. Try to keep it to just the model of the part if possible."""
 
             # Generates the response from GPT 3.5 Turbo model
             response = client.chat.completions.create(
@@ -59,6 +74,31 @@ class OpenAIView(ModelViewSet):
             total_price = (
                 float(total_price_match.group(1)) if total_price_match else None
             )
+
+            for component_key, component_instance in components.items():
+                print(
+                    f"Searching for component: {component_instance.name}"
+                )  # Debug statement
+                parts = pcpp.part_search(component_instance.name, limit=1)
+                if parts:
+                    product = pcpp.fetch_product(parts[0].url)
+                    if product.price:
+                        try:
+                            component_instance.price = float(
+                                product.price.replace("$", "").replace(",", "")
+                            )
+                            component_instance.save()
+                            print(
+                                f"Updated {component_key} price to {component_instance.price}"
+                            )  # Debug statement
+                        except Exception as e:
+                            print(
+                                f"Error updating price for {component_key}: {e}"
+                            )  # Debug statement
+                    else:
+                        print(f"No price found for {component_key}")  # Debug statement
+                else:
+                    print(f"No parts found for {component_key}")  # Debug statement
 
             # Load components into Computer model
             computer = Computer.objects.create(

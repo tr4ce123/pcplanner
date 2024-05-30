@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AIResponse, Preferences } from '../models.module';
+import { AIResponse, Computer, Preferences } from '../models.module';
 import { HomeService } from './home.service';
 
 @Component({
@@ -11,8 +11,9 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent implements OnInit {
 
-  preferences: Preferences[] = [];
+  // preferences: Preferences[] = [];
   aiResponses: AIResponse[] = [];
+  computers: Computer[] = [];
 
   preferenceForm: FormGroup;
 
@@ -27,15 +28,16 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.getPreferences();
+    // this.getPreferences();
     this.getAIResponses();
+    this.getComputers();
   }
 
-  getPreferences() {
-    this.homeService.getPreferences().subscribe((data) => {
-      this.preferences = data;
-    });
-  }
+  // getPreferences() {
+  //   this.homeService.getPreferences().subscribe((data) => {
+  //     this.preferences = data;
+  //   });
+  // }
 
   getAIResponses() {
     this.homeService.getAIResponses().subscribe((data) => {
@@ -43,15 +45,23 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getComputers() {
+    this.homeService.getComputers().subscribe((data) => {
+      this.computers = data;
+    });
+  }
+
+
   onSubmit(): void {
     if (this.preferenceForm.valid) {
       const budget = this.preferenceForm.value.budget;
       this.homeService.createPreference(budget).subscribe((newPreference: Preferences) => {
-        this.preferences.push(newPreference);
+        // this.preferences.push(newPreference);
         this.preferenceForm.reset();
 
-        this.homeService.createAIResponse(newPreference.id).subscribe((newAIResponse: AIResponse) => {
-          this.aiResponses.push(newAIResponse);
+        this.homeService.createAIResponse(newPreference.id).subscribe((newAIResponse) => {
+          this.aiResponses.push(newAIResponse.chatgpt_response);
+          this.computers.push(newAIResponse.computer)
         })
       })
       this.snackBar.open('Success!', '', { duration: 2000 });

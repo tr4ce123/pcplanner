@@ -6,28 +6,32 @@
 </button>
 </mat-toolbar>
 
-<div *ngFor="let preference of preferences">
+<!-- <div *ngFor="let preference of preferences">
     <p> {{ preference.budget }}</p>
-</div>
+</div> -->
 
 <div *ngFor="let response of aiResponses">
     <p> {{ response.response }}</p>
 </div>
 
-<!-- <mat-card>
-    <mat-form-field appearance="outline">
-        <mat-label>
-            Budget
-        </mat-label>
-        <input
-            matInput
-            formControlName="budget"
-            name="budget"
-            required />
-    </mat-form-field>
-</mat-card> -->
 
-<mat-card>
+<mat-card appearance="outlined">
+    <div *ngFor="let computer of computers">
+        <h3>Computer {{ computer.id }}</h3>
+        <p>CPU: {{ computer.components.cpu.name }} - ${{ computer.components.cpu.price }}</p>
+        <p>CPU Cooler: {{ computer.components.cpuCooler.name }} - ${{ computer.components.cpuCooler.price }}</p>
+        <p>GPU: {{ computer.components.gpu.name }} - ${{ computer.components.gpu.price }}</p>
+        <p>Motherboard: {{ computer.components.motherboard.name }} - ${{ computer.components.motherboard.price }}</p>
+        <p>RAM: {{ computer.components.ram.name }} - ${{ computer.components.ram.price }}</p>
+        <p>PSU: {{ computer.components.psu.name }} - ${{ computer.components.psu.price }}</p>
+        <p>Storage: {{ computer.components.storage.name }} - ${{ computer.components.storage.price }}</p>
+        <p>Case: {{ computer.components.case.name }} - ${{ computer.components.case.price }}</p>
+        <p>Total Price: ${{ computer.totalPrice }}</p>
+    </div>
+</mat-card>
+
+
+<mat-card appearance="outlined">
     <form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline">
             <mat-label>Budget</mat-label>
