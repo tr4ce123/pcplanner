@@ -24,5 +24,5 @@ export interface Computer {
     storage: Component;
     case: Component;
   }
-  totalPrice: number;
+  total_price: number;
 }

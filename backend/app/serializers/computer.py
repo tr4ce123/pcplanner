@@ -1,15 +1,15 @@
-from rest_framework import serializers
-from ..models import ChatGPTResponse, Component, Computer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from ..models.computer import Component, Computer
 
 
-class ComponentSerializer(serializers.ModelSerializer):
+class ComponentSerializer(ModelSerializer):
     class Meta:
         model = Component
-        fields = ["name", "price"]
+        fields = "__all__"
 
 
-class ComputerSerializer(serializers.ModelSerializer):
-    components = serializers.SerializerMethodField()
+class ComputerSerializer(ModelSerializer):
+    components = SerializerMethodField()
 
     class Meta:
         model = Computer
@@ -30,9 +30,3 @@ class ComputerSerializer(serializers.ModelSerializer):
             "storage": ComponentSerializer(obj.storage).data,
             "case": ComponentSerializer(obj.case).data,
         }
-
-
-class ChatGPTResponseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ChatGPTResponse
-        fields = ["id", "prompt", "response"]

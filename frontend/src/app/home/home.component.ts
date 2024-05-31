@@ -59,9 +59,9 @@ export class HomeComponent implements OnInit {
         // this.preferences.push(newPreference);
         this.preferenceForm.reset();
 
-        this.homeService.createAIResponse(newPreference.id).subscribe((newAIResponse) => {
-          this.aiResponses.push(newAIResponse.chatgpt_response);
-          this.computers.push(newAIResponse.computer)
+        this.homeService.createAIResponse(newPreference).subscribe((newAIResponse) => {
+          this.getAIResponses();
+          this.getComputers();
         })
       })
       this.snackBar.open('Success!', '', { duration: 2000 });

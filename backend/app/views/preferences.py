@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from ..models import Preferences
-from .serliazers import PreferencesSerializer
+from ..models.preferences import Preferences
+from ..serializers.preferences import PreferencesSerializer
 
 
 class PreferencesViewSet(ModelViewSet):

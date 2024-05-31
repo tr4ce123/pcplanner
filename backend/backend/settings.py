@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "pcplanner",
-    "chatgpt",
+    "app",
 ]
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:4200"]

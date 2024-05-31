@@ -21,11 +21,11 @@ export class HomeService {
   }
 
   getAIResponses(): Observable<AIResponse[]> {
-    return this.http.get<AIResponse[]>(this.apiUrl + 'chatgpt');
+    return this.http.get<AIResponse[]>(this.apiUrl + 'chatresponses');
   }
 
-  createAIResponse(preferenceId: number): Observable<any> {
-    return this.http.post<any>(this.apiUrl + 'chatgpt/', { preferenceId })
+  createAIResponse(preference: Preferences): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'chatresponses/',{ preferences: preference })
   }
 
   getComputers(): Observable<Computer[]> {
