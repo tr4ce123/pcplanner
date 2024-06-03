@@ -1,0 +1,62 @@
+<mat-toolbar color="primary">
+    <span>PC Planner</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon">
+        <mat-icon>menu</mat-icon>
+</button>
+</mat-toolbar>
+
+
+<div *ngFor="let computer of computers">
+    <h3>{{ computer.name }}</h3>
+    <ul>
+    <li *ngIf="computer.components.cpu">
+        <strong>CPU: {{ computer.components.cpu.name }} - ${{ computer.components.cpu.price }}</strong> 
+        <a *ngIf="computer.components.cpu.pcpp_url" [href]="computer.components.cpu.pcpp_url" target="_blank">PCPP Link</a>
+        <img *ngIf="computer.components.cpu.image_url" [src]="computer.components.cpu.image_url" alt="{{ computer.components.cpu.name }}"/>
+    <li *ngIf="computer.components.cpuCooler">
+        <strong>CPU Cooler: {{ computer.components.cpuCooler.name }} - ${{ computer.components.cpuCooler.price }}</strong> 
+        <a *ngIf="computer.components.cpuCooler.pcpp_url" [href]="computer.components.cpuCooler.pcpp_url" target="_blank">PCPP Link</a>
+        <img *ngIf="computer.components.cpuCooler.image_url" [src]="computer.components.cpuCooler.image_url" alt="{{ computer.components.cpuCooler.name }}"/>
+    <li *ngIf="computer.components.gpu">
+        <strong>GPU: {{ computer.components.gpu.name }} - ${{ computer.components.gpu.price }}</strong> 
+        <a *ngIf="computer.components.gpu.pcpp_url" [href]="computer.components.gpu.pcpp_url" target="_blank">PCPP Link</a>
+        <img *ngIf="computer.components.gpu.image_url" [src]="computer.components.gpu.image_url" alt="{{ computer.components.gpu.name }}"/>
+    <li *ngIf="computer.components.motherboard">
+        <strong>Motherboard: {{ computer.components.motherboard.name }} - ${{ computer.components.motherboard.price }}</strong> 
+        <a *ngIf="computer.components.motherboard.pcpp_url" [href]="computer.components.motherboard.pcpp_url" target="_blank">PCPP Link</a>
+        <img *ngIf="computer.components.motherboard.image_url" [src]="computer.components.motherboard.image_url" alt="{{ computer.components.motherboard.name }}"/>
+    <li *ngIf="computer.components.ram">
+        <strong>RAM: {{ computer.components.ram.name }} - ${{ computer.components.ram.price }}</strong> 
+        <a *ngIf="computer.components.ram.pcpp_url" [href]="computer.components.ram.pcpp_url" target="_blank">PCPP Link</a>
+        <img *ngIf="computer.components.ram.image_url" [src]="computer.components.ram.image_url" alt="{{ computer.components.ram.name }}"/>
+    <li *ngIf="computer.components.psu">
+        <strong>PSU: {{ computer.components.psu.name }} - ${{ computer.components.psu.price }}</strong> 
+        <a *ngIf="computer.components.psu.pcpp_url" [href]="computer.components.psu.pcpp_url" target="_blank">PCPP Link</a>
+        <img *ngIf="computer.components.psu.image_url" [src]="computer.components.psu.image_url" alt="{{ computer.components.psu.name }}"/>
+    <li *ngIf="computer.components.storage">
+        <strong>Storage: {{ computer.components.storage.name }} - ${{ computer.components.storage.price }}</strong> 
+        <a *ngIf="computer.components.storage.pcpp_url" [href]="computer.components.storage.pcpp_url" target="_blank">PCPP Link</a>
+        <img *ngIf="computer.components.storage.image_url" [src]="computer.components.storage.image_url" alt="{{ computer.components.storage.name }}"/>
+    <li *ngIf="computer.components.case">
+        <strong>Case: {{ computer.components.case.name }} - ${{ computer.components.case.price }}</strong> 
+        <a *ngIf="computer.components.case.pcpp_url" [href]="computer.components.case.pcpp_url" target="_blank">PCPP Link</a>
+        <img *ngIf="computer.components.case.image_url" [src]="computer.components.case.image_url" alt="{{ computer.components.case.name }}"/>
+    </ul>
+    <p>Total Price: {{computer.total_price }}</p>
+</div>
+
+
+
+<mat-card appearance="outlined">
+    <form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Budget</mat-label>
+            <input matInput formControlName="budget" required />
+            <mat-error *ngIf="preferenceForm.get('budget')?.hasError('required')">
+                Budget is required
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+</mat-card>
