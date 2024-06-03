@@ -10,10 +10,14 @@ export interface AIResponse {
 export interface Component {
   name: string;
   price: number;
+  pcpp_url: string | null;
+  specs: any | null;
+  image_url: string | null;
 }
 
 export interface Computer {
   id: number;
+  name: string;
   components: {
     cpu: Component;
     cpuCooler: Component;

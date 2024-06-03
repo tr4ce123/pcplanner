@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getPreferences();
-    this.getAIResponses();
+    // this.getAIResponses();
     this.getComputers();
   }
 
@@ -39,11 +39,11 @@ export class HomeComponent implements OnInit {
   //   });
   // }
 
-  getAIResponses() {
-    this.homeService.getAIResponses().subscribe((data) => {
-      this.aiResponses = data;
-    })
-  }
+  // getAIResponses() {
+  //   this.homeService.getAIResponses().subscribe((data) => {
+  //     this.aiResponses = data;
+  //   })
+  // }
 
   getComputers() {
     this.homeService.getComputers().subscribe((data) => {
@@ -56,17 +56,15 @@ export class HomeComponent implements OnInit {
     if (this.preferenceForm.valid) {
       const budget = this.preferenceForm.value.budget;
       this.homeService.createPreference(budget).subscribe((newPreference: Preferences) => {
-        // this.preferences.push(newPreference);
         this.preferenceForm.reset();
 
-        this.homeService.createAIResponse(newPreference).subscribe((newAIResponse) => {
-          this.getAIResponses();
+        this.homeService.createComputer(newPreference.id).subscribe(() => {
           this.getComputers();
         })
       })
       this.snackBar.open('Success!', '', { duration: 2000 });
     } else {
-      console.log('Form is invalid');
+      this.snackBar.open('Failed!', '', { duration: 2000 });
     }
   }
 

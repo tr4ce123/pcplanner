@@ -20,12 +20,16 @@ export class HomeService {
     return this.http.post<Preferences>(this.apiUrl + 'preferences/', {budget})
   }
 
-  getAIResponses(): Observable<AIResponse[]> {
-    return this.http.get<AIResponse[]>(this.apiUrl + 'chatresponses');
-  }
+  // getAIResponses(): Observable<AIResponse[]> {
+  //   return this.http.get<AIResponse[]>(this.apiUrl + 'chatresponses');
+  // }
 
-  createAIResponse(preference: Preferences): Observable<any> {
-    return this.http.post<any>(this.apiUrl + 'chatresponses/',{ preferences: preference })
+  // createAIResponse(preference: Preferences): Observable<any> {
+  //   return this.http.post<any>(this.apiUrl + 'chatresponses/',{ preferences: preference })
+  // }
+
+  createComputer(preferences_id: number): Observable<Computer> {
+    return this.http.post<Computer>(this.apiUrl + 'computers/', { preferences_id })
   }
 
   getComputers(): Observable<Computer[]> {

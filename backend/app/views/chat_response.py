@@ -17,14 +17,14 @@ client = OpenAI(api_key=os.environ["OPENAI_KEY"])
 scraperAPI = os.environ["SCRAPER_API_KEY"]
 
 
-def scraperapi_response_retriever(url, **kwargs):
-    scraperapi_url = f"http://api.scraperapi.com/?api_key={scraperAPI}&url={url}"
-    response = requests.get(scraperapi_url, **kwargs)
-    response.raise_for_status()
-    return response
+# def scraperapi_response_retriever(url, **kwargs):
+#     scraperapi_url = f"http://api.scraperapi.com/?api_key={scraperAPI}&url={url}"
+#     response = requests.get(scraperapi_url, **kwargs)
+#     response.raise_for_status()
+#     return response
 
 
-pcpp = Scraper(response_retriever=scraperapi_response_retriever)
+# pcpp = Scraper(response_retriever=scraperapi_response_retriever)
 
 
 class ChatResponseViewSet(ModelViewSet):
@@ -86,45 +86,45 @@ class ChatResponseViewSet(ModelViewSet):
                 )
                 components[match[0].strip().replace(" ", "_").lower()] = component
 
-            def clean_price(price_str):
-                return float(re.sub(r"[^\d.]", "", price_str))
+            # def clean_price(price_str):
+            #     return float(re.sub(r"[^\d.]", "", price_str))
 
-            for component_key, component_instance in components.items():
-                print(
-                    f"Searching for component: {component_instance.name}"
-                )  # Debug statement
-                parts = pcpp.part_search(component_instance.name, limit=1)
-                if parts:
-                    product = pcpp.fetch_product(parts[0].url)
-                    if product.price:
-                        try:
-                            component_instance.price = clean_price(product.price)
-                            component_instance.save()
-                            print(
-                                f"Updated {component_key} price to {component_instance.price}"
-                            )  # Debug statement
-                        except Exception as e:
-                            print(
-                                f"Error updating price for {component_key}: {e}"
-                            )  # Error statement
-                    else:
-                        print(f"No price found for {component_key}")  # Debug statement
-                else:
-                    print(f"No parts found for {component_key}")  # Debug statement
+            # for component_key, component_instance in components.items():
+            #     print(
+            #         f"Searching for component: {component_instance.name}"
+            #     )  # Debug statement
+            #     parts = pcpp.part_search(component_instance.name, limit=1)
+            #     if parts:
+            #         product = pcpp.fetch_product(parts[0].url)
+            #         if product.price:
+            #             try:
+            #                 component_instance.price = clean_price(product.price)
+            #                 component_instance.save()
+            #                 print(
+            #                     f"Updated {component_key} price to {component_instance.price}"
+            #                 )  # Debug statement
+            #             except Exception as e:
+            #                 print(
+            #                     f"Error updating price for {component_key}: {e}"
+            #                 )  # Error statement
+            #         else:
+            #             print(f"No price found for {component_key}")  # Debug statement
+            #     else:
+            #         print(f"No parts found for {component_key}")  # Debug statement
 
-            # Load components into Computer model
-            computer_data = {
-                "cpu": components.get("cpu"),
-                "cpu_cooler": components.get("cpu_cooler"),
-                "gpu": components.get("gpu"),
-                "motherboard": components.get("motherboard"),
-                "ram": components.get("ram"),
-                "psu": components.get("psu"),
-                "storage": components.get("ssd"),
-                "case": components.get("case"),
-            }
+            # # Load components into Computer model
+            # computer_data = {
+            #     "cpu": components.get("cpu"),
+            #     "cpu_cooler": components.get("cpu_cooler"),
+            #     "gpu": components.get("gpu"),
+            #     "motherboard": components.get("motherboard"),
+            #     "ram": components.get("ram"),
+            #     "psu": components.get("psu"),
+            #     "storage": components.get("ssd"),
+            #     "case": components.get("case"),
+            # }
 
-            computer = Computer.objects.create(**computer_data)
+            # computer = Computer.objects.create(**computer_data)
 
             # Load response into model
             chat_response = ChatResponse.objects.create(
@@ -135,7 +135,7 @@ class ChatResponseViewSet(ModelViewSet):
 
             response_data = {
                 "chat_response": ChatResponseSerializer(chat_response).data,
-                "computer": ComputerSerializer(computer).data,
+                # "computer": ComputerSerializer(computer).data,
             }
 
             return Response(response_data, status=status.HTTP_201_CREATED)
