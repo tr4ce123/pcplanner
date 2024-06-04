@@ -15,7 +15,6 @@ ENV PGPORT=${PGPORT}
 ENV SCRAPER_API_KEY=${SCRAPER_API_KEY}
 ENV OPENAI_KEY=${OPENAI_KEY}
 
-RUN python -c "import psycopg2; conn = psycopg2.connect(dbname='${PGDATABASE}', user='${PGUSER}', password='${POSTGRES_PASSWORD}', host='${PGHOST}', port='${PGPORT}'); print('Database connection successful');"
 
 RUN python manage.py collectstatic --noinput
 
@@ -24,4 +23,4 @@ RUN python manage.py migrate
 EXPOSE 8000
 
 
-CMD ["python", "manage.py", "runserver"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
