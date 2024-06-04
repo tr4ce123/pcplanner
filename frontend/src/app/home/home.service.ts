@@ -8,7 +8,7 @@ import { AIResponse, Computer, Preferences } from '../models.module';
 })
 export class HomeService {
 
-  apiUrl = 'http://localhost:8000/api/';
+  apiUrl = 'https://pcplanner-production.up.railway.app/api/';
 
   constructor(protected http: HttpClient) { }
 
