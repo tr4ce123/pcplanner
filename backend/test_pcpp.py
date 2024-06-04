@@ -1,12 +1,15 @@
 from time import sleep
 from pypartpicker import Scraper, Product
-import requests
+import requests, os
+from dotenv import load_dotenv
 
-SCRAPER_API_KEY = "118f04485ac165809d11be198742cc47"
+
+load_dotenv()
+scraperAPI = os.environ["SCRAPER_API_KEY"]
 
 
 def scraperapi_response_retriever(url, **kwargs):
-    scraperapi_url = f"http://api.scraperapi.com/?api_key={SCRAPER_API_KEY}&url={url}"
+    scraperapi_url = f"http://api.scraperapi.com/?api_key={scraperAPI}&url={url}"
     response = requests.get(scraperapi_url, **kwargs)
     response.raise_for_status()
     return response
