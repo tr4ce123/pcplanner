@@ -13,7 +13,7 @@ class Component(models.Model):
 
 
 class Computer(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255)
     cpu = models.OneToOneField(
         Component, on_delete=models.CASCADE, related_name="cpu", null=True
     )
@@ -49,7 +49,7 @@ class Computer(models.Model):
             except (TypeError, ValueError):
                 return 0.0
 
-        self.total_price = sum(
+        self.total_price = round(sum(
             [
                 to_float(self.cpu.price) if self.cpu else 0,
                 to_float(self.cpu_cooler.price) if self.cpu_cooler else 0,
@@ -60,7 +60,7 @@ class Computer(models.Model):
                 to_float(self.storage.price) if self.storage else 0,
                 to_float(self.case.price) if self.case else 0,
             ]
-        )
+        ), 2)
 
         super().save(*args, **kwargs)
 

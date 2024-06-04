@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatGridListModule } from '@angular/material/grid-list'
 
 
 @NgModule({ declarations: [
@@ -36,7 +37,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
         MatCardModule,
         MatInputModule,
         ReactiveFormsModule,
-        MatSnackBarModule], providers: [
+        MatSnackBarModule,
+        MatGridListModule
+    ], providers: [
         provideAnimationsAsync(),
         provideHttpClient(withInterceptorsFromDi())
     ] })
