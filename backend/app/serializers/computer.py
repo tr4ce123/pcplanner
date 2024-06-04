@@ -15,6 +15,7 @@ class ComputerSerializer(ModelSerializer):
         model = Computer
         fields = [
             "id",
+            "name",
             "components",
             "total_price",
         ]
