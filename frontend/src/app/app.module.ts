@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -20,31 +20,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule,
-
-    // Material UI
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatSnackBarModule
-  ],
-  providers: [
-    provideAnimationsAsync()
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        // Material UI
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatSnackBarModule], providers: [
+        provideAnimationsAsync(),
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
