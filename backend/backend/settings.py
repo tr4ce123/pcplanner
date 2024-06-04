@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,8 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-m8gm@4o7mp(bps^7q8x^e!n&co362vpxgus*2!iek(-@2ifw7_"
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -86,9 +91,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'CBqSGlkjIcyOkKjVcRKohZXhpKRAFtgE',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '49101',
+        'PASSWORD': os.environ["DB_PASS"],
+        'HOST': 'os.environ["DB_HOST"]',
+        'PORT': 'os.environ["DB_PORT"]',
     }
 }
 
