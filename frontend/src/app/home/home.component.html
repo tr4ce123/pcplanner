@@ -50,14 +50,21 @@
 <div class="container">
     <mat-card appearance="outlined" class="preference-form-card">
         <mat-card-header>
-            <mat-card-title>Build a computer by specifying your budget</mat-card-title>
+          <mat-card-title>Build a computer by specifying your budget</mat-card-title>
         </mat-card-header>
         <form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Budget</mat-label>
-            <input matInput formControlName="budget" required />
-            <mat-error *ngIf="preferenceForm.get('budget')?.hasError('required')">Budget is required</mat-error>
+          <mat-label>Budget</mat-label>
+          <input matInput formControlName="budget" required />
+          <mat-error *ngIf="preferenceForm.get('budget')?.hasError('required')">Budget is required</mat-error>
         </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Chipset</mat-label>
+          <mat-select formControlName="chipset">
+            <mat-option value="intel">Intel</mat-option>
+            <mat-option value="amd">AMD</mat-option>
+          </mat-select>
+      </mat-form-field>
         <mat-card-actions>
             <button mat-stroked-button color="primary" type="submit">Submit</button>
         </mat-card-actions>
@@ -110,6 +117,11 @@
                   <img *ngIf="computer.components.case.image_url" [src]="computer.components.case.image_url" alt="{{ computer.components.case.name }}" class="component-image" />
                   <strong>Case: {{ computer.components.case.name }} - ${{ computer.components.case.price }}</strong>
                   <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.case.pcpp_url" [href]="computer.components.case.pcpp_url" target="_blank">PCPP Link</a>
+                </div>
+                <div>
+                  <button mat-stroked-button color="primary" (click)="onDelete(computer)">
+                    Delete
+                  </button>
                 </div>
               </mat-card-content>
             </mat-card>
