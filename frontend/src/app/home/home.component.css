@@ -20,6 +20,12 @@ mat-grid-tile {
   justify-content: center;
 }
 
+@media (max-width: 768px) {
+  mat-grid-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 mat-card {
   margin: 10px;

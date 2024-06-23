@@ -5,6 +5,7 @@ import { AIResponse, Computer, Preferences } from '../models.module';
 import { HomeService } from './home.service';
 import { computersResolver } from './computers.resolver';
 import { ActivatedRoute, Route } from '@angular/router';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
   computers: Computer[] = [];
 
   preferenceForm: FormGroup;
+  cols!: number;
 
 
   public static Route: Route = {
@@ -41,12 +43,18 @@ export class HomeComponent implements OnInit {
         budget: [0, Validators.required],
         chipset: [''],
       });
+      this.onResize(); 
     }
 
   ngOnInit(): void {
     // this.getPreferences();
     // this.getAIResponses();
     this.getComputers();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?: Event): void {
+    this.cols = window.innerWidth <= 768 ? 1 : 2;
   }
 
   // getPreferences() {
