@@ -1,6 +1,7 @@
 export interface Preferences {
   id: number,
-  budget: number
+  budget: number,
+  chipset: string
 }
 
 export interface AIResponse {

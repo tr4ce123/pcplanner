@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AIResponse, Computer, Preferences } from '../models.module';
 import { HomeService } from './home.service';
+import { computersResolver } from './computers.resolver';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,21 +12,35 @@ import { HomeService } from './home.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-
-  // preferences: Preferences[] = [];
   aiResponses: AIResponse[] = [];
   computers: Computer[] = [];
 
   preferenceForm: FormGroup;
 
+
+  public static Route: Route = {
+    path: 'home',
+    component: HomeComponent,
+    resolve: { computers: computersResolver }
+  }
+  // preferences: Preferences[] = [];
+  
   constructor(
     private homeService: HomeService, 
     protected formBuilder: FormBuilder,
-    protected snackBar: MatSnackBar
+    protected snackBar: MatSnackBar,
+    private route: ActivatedRoute,
     ) {
+      // const data = this.route.snapshot.data as {
+      //   computers: Computer[];
+      // };
+      // this.computers = data.computers;
+      // console.log('Resolved computers:', data.computers);
+
       this.preferenceForm = this.formBuilder.group({
-        budget: [0, Validators.required]
-      });  
+        budget: [0, Validators.required],
+        chipset: [''],
+      });
     }
 
   ngOnInit(): void {
@@ -55,17 +71,41 @@ export class HomeComponent implements OnInit {
   onSubmit(): void {
     if (this.preferenceForm.valid) {
       const budget = this.preferenceForm.value.budget;
-      this.homeService.createPreference(budget).subscribe((newPreference: Preferences) => {
-        this.preferenceForm.reset();
+      const chipset = this.preferenceForm.value.chipset;
 
-        this.homeService.createComputer(newPreference.id).subscribe(() => {
-          this.getComputers();
-        })
-      })
-      this.snackBar.open('Success!', '', { duration: 2000 });
+      this.homeService.createPreference(budget, chipset).subscribe({
+        next: (newPreference: Preferences) => {
+          this.preferenceForm.reset();
+          
+          this.homeService.createComputer(newPreference.id!).subscribe({
+            next: () => {
+              this.getComputers();
+              this.snackBar.open('Computer created successfully!', '', { duration: 2000 });
+            },
+            error: () => {
+              this.snackBar.open('Failed to create computer!', '', { duration: 2000 });
+            }
+          });
+        },
+        error: () => {
+          this.snackBar.open('Failed to create preference!', '', { duration: 2000 });
+        }
+      });
     } else {
-      this.snackBar.open('Failed!', '', { duration: 2000 });
+      this.snackBar.open('Form is invalid!', '', { duration: 2000 });
     }
+  }
+
+  onDelete(computer: Computer) {
+    this.homeService.deleteComputer(computer.id!).subscribe({
+      next: () => {
+        this.snackBar.open('Computer deleted successfully!', '', { duration: 2000 });
+        this.getComputers();
+      },
+      error: () => {
+        this.snackBar.open('Failed to delete computer!', '', { duration: 2000 });
+      }
+    });
   }
 
 }

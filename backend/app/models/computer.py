@@ -2,41 +2,48 @@ from django.db import models
 
 
 class Component(models.Model):
+    type = models.CharField(null=True)
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     pcpp_url = models.URLField(max_length=200, null=True, blank=True)
-    specs = models.JSONField(null=True, blank=True)
+    specs = models.JSONField(null = True)
     image_url = models.URLField(null=True)
+    rating = models.DecimalField(max_digits=3, decimal_places=2, null=True)
 
     def __str__(self):
         return f"{self.name} - ${self.price}"
 
+class FailedURL(models.Model):
+    url = models.URLField(max_length=200)
+
+    def __str__(self):
+        return f"Failed URL: {self.url}"
 
 class Computer(models.Model):
     name = models.CharField(max_length=255)
-    cpu = models.OneToOneField(
-        Component, on_delete=models.CASCADE, related_name="cpu", null=True
+    cpu = models.ForeignKey(
+        Component, on_delete=models.CASCADE, related_name="cpu_computers", null=True
     )
-    cpu_cooler = models.OneToOneField(
-        Component, on_delete=models.CASCADE, related_name="cpu_cooler", null=True
+    cpu_cooler = models.ForeignKey(
+        Component, on_delete=models.CASCADE, related_name="cpu_cooler_computers", null=True
     )
-    gpu = models.OneToOneField(
-        Component, on_delete=models.CASCADE, related_name="gpu", null=True
+    gpu = models.ForeignKey(
+        Component, on_delete=models.CASCADE, related_name="gpu_computers", null=True
     )
-    motherboard = models.OneToOneField(
-        Component, on_delete=models.CASCADE, related_name="motherboard", null=True
+    motherboard = models.ForeignKey(
+        Component, on_delete=models.CASCADE, related_name="motherboard_computers", null=True
     )
-    ram = models.OneToOneField(
-        Component, on_delete=models.CASCADE, related_name="ram", null=True
+    ram = models.ForeignKey(
+        Component, on_delete=models.CASCADE, related_name="ram_computers", null=True
     )
-    psu = models.OneToOneField(
-        Component, on_delete=models.CASCADE, related_name="psu", null=True
+    psu = models.ForeignKey(
+        Component, on_delete=models.CASCADE, related_name="psu_computers", null=True
     )
-    storage = models.OneToOneField(
-        Component, on_delete=models.CASCADE, related_name="storage", null=True
+    storage = models.ForeignKey(
+        Component, on_delete=models.CASCADE, related_name="storage_computers", null=True
     )
-    case = models.OneToOneField(
-        Component, on_delete=models.CASCADE, related_name="case", null=True
+    case = models.ForeignKey(
+        Component, on_delete=models.CASCADE, related_name="case_computers", null=True
     )
     total_price = models.FloatField(null=True, blank=True)
 

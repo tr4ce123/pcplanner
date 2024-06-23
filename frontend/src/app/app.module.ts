@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatGridListModule } from '@angular/material/grid-list'
+import { MatSelectModule } from '@angular/material/select'
 
 
 @NgModule({ declarations: [
@@ -38,7 +39,8 @@ import { MatGridListModule } from '@angular/material/grid-list'
         MatInputModule,
         ReactiveFormsModule,
         MatSnackBarModule,
-        MatGridListModule
+        MatGridListModule,
+        MatSelectModule
     ], providers: [
         provideAnimationsAsync(),
         provideHttpClient(withInterceptorsFromDi())

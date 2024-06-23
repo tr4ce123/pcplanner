@@ -1,10 +1,15 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
-from ..models.computer import Component, Computer
+from ..models.computer import Component, Computer, FailedURL
 
 
 class ComponentSerializer(ModelSerializer):
     class Meta:
         model = Component
+        fields = "__all__"
+
+class FailedURLSerializer(ModelSerializer):
+    class Meta:
+        model = FailedURL
         fields = "__all__"
 
 
