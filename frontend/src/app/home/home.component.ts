@@ -41,7 +41,9 @@ export class HomeComponent implements OnInit {
 
       this.preferenceForm = this.formBuilder.group({
         budget: [0, Validators.required],
-        chipset: [''],
+        chipset: ['', Validators.required],
+        need_wifi: [true, Validators.required],
+        usage: ['', Validators.required]
       });
       this.onResize(); 
     }
@@ -80,8 +82,10 @@ export class HomeComponent implements OnInit {
     if (this.preferenceForm.valid) {
       const budget = this.preferenceForm.value.budget;
       const chipset = this.preferenceForm.value.chipset;
+      const need_wifi = this.preferenceForm.value.need_wifi;
+      const usage = this.preferenceForm.value.usage;
 
-      this.homeService.createPreference(budget, chipset).subscribe({
+      this.homeService.createPreference(budget, chipset, need_wifi, usage).subscribe({
         next: (newPreference: Preferences) => {
           this.preferenceForm.reset();
           

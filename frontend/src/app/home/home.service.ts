@@ -17,8 +17,8 @@ export class HomeService {
     return this.http.get<Preferences[]>(this.apiUrl + 'preferences');
   }
 
-  createPreference(budget: number, chipset: string): Observable<Preferences> {
-    return this.http.post<Preferences>(this.apiUrl + 'preferences/', { budget, chipset })
+  createPreference(budget: number, chipset: string, need_wifi: boolean, usage: string): Observable<Preferences> {
+    return this.http.post<Preferences>(this.apiUrl + 'preferences/', { budget, chipset, need_wifi, usage })
   }
 
   // getAIResponses(): Observable<AIResponse[]> {
