@@ -8,8 +8,8 @@ import { AIResponse, Computer, Preferences } from '../models.module';
 })
 export class HomeService {
 
-  apiUrl = 'https://pcplanner-production.up.railway.app/api/';
-  // apiUrl = 'http://127.0.0.1:8000/api/';
+  // apiUrl = 'https://pcplanner-production.up.railway.app/api/';
+  apiUrl = 'http://127.0.0.1:8000/api/';
 
   constructor(protected http: HttpClient) { }
 
@@ -17,8 +17,8 @@ export class HomeService {
     return this.http.get<Preferences[]>(this.apiUrl + 'preferences');
   }
 
-  createPreference(budget: number, chipset: string): Observable<Preferences> {
-    return this.http.post<Preferences>(this.apiUrl + 'preferences/', { budget, chipset })
+  createPreference(budget: number, chipset: string, need_wifi: boolean, usage: string): Observable<Preferences> {
+    return this.http.post<Preferences>(this.apiUrl + 'preferences/', { budget, chipset, need_wifi, usage })
   }
 
   // getAIResponses(): Observable<AIResponse[]> {

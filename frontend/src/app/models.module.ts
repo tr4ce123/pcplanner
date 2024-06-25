@@ -1,7 +1,9 @@
 export interface Preferences {
   id: number,
   budget: number,
-  chipset: string
+  chipset: string,
+  need_wifi: boolean
+  usage: string
 }
 
 export interface AIResponse {

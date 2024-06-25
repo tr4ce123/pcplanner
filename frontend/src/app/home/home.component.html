@@ -59,12 +59,26 @@
           <mat-error *ngIf="preferenceForm.get('budget')?.hasError('required')">Budget is required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Usage</mat-label>
+          <mat-select formControlName="usage">
+            <mat-option value="gaming">Gaming</mat-option>
+            <mat-option value="productivity">Productivity</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Chipset</mat-label>
           <mat-select formControlName="chipset">
             <mat-option value="intel">Intel</mat-option>
             <mat-option value="amd">AMD</mat-option>
           </mat-select>
-      </mat-form-field>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Wireless Internet?</mat-label>
+          <mat-select formControlName="need_wifi">
+            <mat-option value="true">Yes</mat-option>
+            <mat-option value="false">No</mat-option>
+          </mat-select>
+        </mat-form-field>
         <mat-card-actions>
             <button mat-stroked-button color="primary" type="submit">Submit</button>
         </mat-card-actions>
