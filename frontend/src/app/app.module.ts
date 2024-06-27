@@ -20,7 +20,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatSelectModule } from '@angular/material/select'
-
+import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatListModule } from '@angular/material/list'
+import { MatSidenavModule } from '@angular/material/sidenav'
 
 @NgModule({ declarations: [
         AppComponent,
@@ -40,7 +43,11 @@ import { MatSelectModule } from '@angular/material/select'
         ReactiveFormsModule,
         MatSnackBarModule,
         MatGridListModule,
-        MatSelectModule
+        MatSelectModule,
+        MatProgressBarModule,
+        MatStepperModule,
+        MatListModule,
+        MatSidenavModule
     ], providers: [
         provideAnimationsAsync(),
         provideHttpClient(withInterceptorsFromDi())

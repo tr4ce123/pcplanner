@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AIResponse, Computer, Preferences } from '../models.module';
@@ -6,6 +6,8 @@ import { HomeService } from './home.service';
 import { computersResolver } from './computers.resolver';
 import { ActivatedRoute, Route } from '@angular/router';
 import { HostListener } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +15,21 @@ import { HostListener } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('stepper') stepper!: MatStepper;
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+
   aiResponses: AIResponse[] = [];
   computers: Computer[] = [];
 
-  preferenceForm: FormGroup;
+  budgetFormGroup: FormGroup;
+  usageFormGroup: FormGroup;
+  chipsetFormGroup: FormGroup;
+  wifiFormGroup: FormGroup;
+
   cols!: number;
+  isLoading: boolean = false;
+  opened: boolean = false;
 
 
   public static Route: Route = {
@@ -39,17 +51,23 @@ export class HomeComponent implements OnInit {
       // this.computers = data.computers;
       // console.log('Resolved computers:', data.computers);
 
-      this.preferenceForm = this.formBuilder.group({
-        budget: [0, Validators.required],
-        chipset: ['', Validators.required],
-        need_wifi: [true, Validators.required],
+      this.budgetFormGroup = this.formBuilder.group({
+        budget: [, Validators.required]
+      });
+      this.usageFormGroup = this.formBuilder.group({
         usage: ['', Validators.required]
       });
+      this.chipsetFormGroup = this.formBuilder.group({
+        chipset: ['', Validators.required]
+      });
+      this.wifiFormGroup = this.formBuilder.group({
+        need_wifi: [true, Validators.required]
+      });
+  
       this.onResize(); 
     }
 
   ngOnInit(): void {
-    // this.getPreferences();
     // this.getAIResponses();
     this.getComputers();
   }
@@ -58,12 +76,6 @@ export class HomeComponent implements OnInit {
   onResize(event?: Event): void {
     this.cols = window.innerWidth <= 768 ? 1 : 2;
   }
-
-  // getPreferences() {
-  //   this.homeService.getPreferences().subscribe((data) => {
-  //     this.preferences = data;
-  //   });
-  // }
 
   // getAIResponses() {
   //   this.homeService.getAIResponses().subscribe((data) => {
@@ -74,21 +86,33 @@ export class HomeComponent implements OnInit {
   getComputers() {
     this.homeService.getComputers().subscribe((data) => {
       this.computers = data;
+      this.isLoading = false;
     });
   }
 
 
   onSubmit(): void {
-    if (this.preferenceForm.valid) {
-      const budget = this.preferenceForm.value.budget;
-      const chipset = this.preferenceForm.value.chipset;
-      const need_wifi = this.preferenceForm.value.need_wifi;
-      const usage = this.preferenceForm.value.usage;
+    if (
+      this.budgetFormGroup.valid &&
+      this.usageFormGroup.valid &&
+      this.chipsetFormGroup.valid &&
+      this.wifiFormGroup.valid
+    ) {
+      const budget = this.budgetFormGroup.value.budget;
+      const chipset = this.chipsetFormGroup.value.chipset;
+      const need_wifi = this.wifiFormGroup.value.need_wifi;
+      const usage = this.usageFormGroup.value.usage;
+
+      this.isLoading = true;
 
       this.homeService.createPreference(budget, chipset, need_wifi, usage).subscribe({
         next: (newPreference: Preferences) => {
-          this.preferenceForm.reset();
-          
+          this.budgetFormGroup.reset();
+          this.usageFormGroup.reset();
+          this.chipsetFormGroup.reset();
+          this.wifiFormGroup.reset();
+          this.stepper.reset();
+
           this.homeService.createComputer(newPreference.id!).subscribe({
             next: () => {
               this.getComputers();
@@ -96,16 +120,20 @@ export class HomeComponent implements OnInit {
             },
             error: () => {
               this.snackBar.open('Failed to create computer!', '', { duration: 2000 });
+              this.isLoading = false;
             }
           });
         },
         error: () => {
           this.snackBar.open('Failed to create preference!', '', { duration: 2000 });
+          this.isLoading = false;
         }
       });
     } else {
       this.snackBar.open('Form is invalid!', '', { duration: 2000 });
+      this.isLoading = false;
     }
+
   }
 
   onDelete(computer: Computer) {
