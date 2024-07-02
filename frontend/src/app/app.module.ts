@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { BuilderComponent } from './builder/builder.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
@@ -27,7 +28,8 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 
 @NgModule({ declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        BuilderComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         FormsModule,

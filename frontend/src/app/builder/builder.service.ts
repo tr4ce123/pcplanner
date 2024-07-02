@@ -6,10 +6,10 @@ import { AIResponse, Computer, Preferences } from '../models.module';
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class BuilderService {
 
-  apiUrl = 'https://pcplanner-production.up.railway.app/api/';
-  // apiUrl = 'http://127.0.0.1:8000/api/';
+  // apiUrl = 'https://pcplanner-production.up.railway.app/api/';
+  apiUrl = 'http://127.0.0.1:8000/api/';
 
   constructor(protected http: HttpClient) { }
 

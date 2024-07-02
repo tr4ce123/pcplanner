@@ -1,44 +1,68 @@
-/* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
+@use 'm3-theme.scss' as theme;
 
 @include mat.core();
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-// $custom-primary-palette: (
-//     50: #e8eaf6,
-//     100: #c5cae9,
-//     200: #9fa8da,
-//     300: #7986cb,
-//     400: #5c6bc0,
-//     500: #3f51b5,
-//     600: #394aae,
-//     700: #3140a5,
-//     800: #29379d,
-//     900: #1b278d,
-//     contrast: (
-//         50: #000,
-//         100: #000,
-//         200: #000,
-//         300: #fff,
-//         400: #fff,
-//         500: #fff,
-//         600: #fff
-//     )
-// );
+@mixin global-styles($theme) {
+    p {
+        font: mat.get-theme-typography($theme, body-medium, font);
+    }
 
+    .primary-background {
+        background: mat.get-theme-color($theme, primary) !important;
+        color: mat.get-theme-color($theme, on-primary) !important;
+    }
 
-// $custom-primary: mat.define-palette($custom-primary-palette);
-// $custom-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-// $custom-warn: mat.define-palette(mat.$red-palette);
+    .primary-background-color {
+        background-color: mat.get-theme-color($theme, primary) !important;
+        color: mat.get-theme-color($theme, on-primary) !important;
+    }
 
-// $custom-theme: mat.define-light-theme((
-//     color: (
-//         primary: $custom-primary,
-//         accent: $custom-accent,
-//         warn: $custom-warn
-//     )
-// ));
+    .primary-color {
+        color: mat.get-theme-color($theme, primary) !important;
+    }
 
-// @include mat.all-component-themes($custom-theme)
+    .secondary-background {
+        background: mat.get-theme-color($theme, secondary) !important;
+        color: mat.get-theme-color($theme, on-secondary) !important;
+    }
+
+    .secondary-background-color {
+        background-color: mat.get-theme-color($theme, secondary) !important;
+        color: mat.get-theme-color($theme, on-secondary) !important;
+    }
+
+    .secondary-color {
+        color: mat.get-theme-color($theme, secondary) !important;
+    }
+
+    .tertiary-background {
+        background: mat.get-theme-color($theme, tertiary) !important;
+        color: mat.get-theme-color($theme, on-tertiary) !important;
+    }
+
+    .tertiary-background-color {
+        background-color: mat.get-theme-color($theme, tertiary) !important;
+        color: mat.get-theme-color($theme, on-tertiary) !important;
+    }
+
+    .tertiary-color {
+        color: mat.get-theme-color($theme, tertiary) !important;
+    }
+}
+
+@mixin apply-styles($theme) {
+    @include global-styles($theme);
+}
+
+html {
+    @include mat.all-component-themes(theme.$light-theme);
+    @include apply-styles(theme.$light-theme);
+}
+
