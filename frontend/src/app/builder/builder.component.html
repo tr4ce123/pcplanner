@@ -1,0 +1,154 @@
+<div class="container">
+    <mat-card appearance="outlined" class="preference-form-card">
+        <mat-stepper orientation="horizontal" [linear]="false" #stepper>
+            <mat-step [stepControl]="budgetFormGroup">
+                <form [formGroup]="budgetFormGroup">
+                    <ng-template matStepLabel>How much are you willing to spend?</ng-template>
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Budget</mat-label>
+                        <input matInput formControlName="budget" required placeholder="Ex. 1000" />
+                        <mat-error *ngIf="budgetFormGroup.get('budget')?.hasError('required')">Budget is required</mat-error>
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="usageFormGroup">
+                <form [formGroup]="usageFormGroup">
+                    <ng-template matStepLabel>What will you be using your PC for?</ng-template>
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Usage</mat-label>
+                        <mat-select formControlName="usage">
+                            <mat-option value="Gaming">Gaming</mat-option>
+                            <mat-option value="Productivity">Productivity</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="chipsetFormGroup">
+                <form [formGroup]="chipsetFormGroup">
+                    <ng-template matStepLabel>Intel or AMD?</ng-template>
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Chipset</mat-label>
+                        <mat-select formControlName="chipset">
+                            <mat-option value="Intel">Intel</mat-option>
+                            <mat-option value="AMD">AMD</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="wifiFormGroup">
+                <form [formGroup]="wifiFormGroup">
+                    <ng-template matStepLabel>Do you need a wireless connection?</ng-template>
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Wireless Internet?</mat-label>
+                        <mat-select formControlName="need_wifi">
+                            <mat-option value="true">Yes</mat-option>
+                            <mat-option value="false">No</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Review and Submit</ng-template>
+                <div>
+                    <mat-list>
+                        <mat-list-item>
+                            <span matListItemTitle>Budget</span>
+                            <span matListItemLine>${{ budgetFormGroup.value.budget }}</span>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span matListItemTitle>Usage</span>
+                            <span matListItemLine>{{ usageFormGroup.value.usage }}</span>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span matListItemTitle>Chipset</span>
+                            <span matListItemLine>{{ chipsetFormGroup.value.chipset }}</span>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span matListItemTitle>Wireless Internet</span>
+                            <span matListItemLine *ngIf="wifiFormGroup.value.need_wifi">Yes</span>
+                            <span matListItemLine *ngIf="!wifiFormGroup.value.need_wifi">No</span>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="onSubmit()">Create my PC</button>
+                </div>
+            </mat-step>
+        </mat-stepper>
+
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    </mat-card>
+
+    <mat-grid-list cols="2" rowHeight="1:1" gutterSize="5px">
+        <mat-grid-tile *ngFor="let computer of computers">
+            <mat-card class="computer-card">
+                <mat-card-header>
+                    <mat-card-title>{{ computer.name }}: ${{ computer.total_price }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="component" *ngIf="computer.components.cpu">
+                        <img *ngIf="computer.components.cpu.image_url" [src]="computer.components.cpu.image_url" alt="{{ computer.components.cpu.name }}" class="component-image" />
+                        <strong>CPU: {{ computer.components.cpu.name }} - ${{ computer.components.cpu.price }}</strong>
+                        <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.cpu.pcpp_url" [href]="computer.components.cpu.pcpp_url" target="_blank">PCPP Link</a>
+                    </div>
+                    <div class="component" *ngIf="computer.components.cpuCooler">
+                        <img *ngIf="computer.components.cpuCooler.image_url" [src]="computer.components.cpuCooler.image_url" alt="{{ computer.components.cpuCooler.name }}" class="component-image" />
+                        <strong>CPU Cooler: {{ computer.components.cpuCooler.name }} - ${{ computer.components.cpuCooler.price }}</strong>
+                        <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.cpuCooler.pcpp_url" [href]="computer.components.cpuCooler.pcpp_url" target="_blank">PCPP Link</a>
+                    </div>
+                    <div class="component" *ngIf="computer.components.gpu">
+                        <img *ngIf="computer.components.gpu.image_url" [src]="computer.components.gpu.image_url" alt="{{ computer.components.gpu.name }}" class="component-image" />
+                        <strong>GPU: {{ computer.components.gpu.name }} - ${{ computer.components.gpu.price }}</strong>
+                        <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.gpu.pcpp_url" [href]="computer.components.gpu.pcpp_url" target="_blank">PCPP Link</a>
+                    </div>
+                    <div class="component" *ngIf="computer.components.motherboard">
+                        <img *ngIf="computer.components.motherboard.image_url" [src]="computer.components.motherboard.image_url" alt="{{ computer.components.motherboard.name }}" class="component-image" />
+                        <strong>Motherboard: {{ computer.components.motherboard.name }} - ${{ computer.components.motherboard.price }}</strong>
+                        <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.motherboard.pcpp_url" [href]="computer.components.motherboard.pcpp_url" target="_blank">PCPP Link</a>
+                    </div>
+                    <div class="component" *ngIf="computer.components.ram">
+                        <img *ngIf="computer.components.ram.image_url" [src]="computer.components.ram.image_url" alt="{{ computer.components.ram.name }}" class="component-image" />
+                        <strong>RAM: {{ computer.components.ram.name }} - ${{ computer.components.ram.price }}</strong>
+                        <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.ram.pcpp_url" [href]="computer.components.ram.pcpp_url" target="_blank">PCPP Link</a>
+                    </div>
+                    <div class="component" *ngIf="computer.components.psu">
+                        <img *ngIf="computer.components.psu.image_url" [src]="computer.components.psu.image_url" alt="{{ computer.components.psu.name }}" class="component-image" />
+                        <strong>PSU: {{ computer.components.psu.name }} - ${{ computer.components.psu.price }}</strong>
+                        <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.psu.pcpp_url" [href]="computer.components.psu.pcpp_url" target="_blank">PCPP Link</a>
+                    </div>
+                    <div class="component" *ngIf="computer.components.storage">
+                        <img *ngIf="computer.components.storage.image_url" [src]="computer.components.storage.image_url" alt="{{ computer.components.storage.name }}" class="component-image" />
+                        <strong>Storage: {{ computer.components.storage.name }} - ${{ computer.components.storage.price }}</strong>
+                        <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.storage.pcpp_url" [href]="computer.components.storage.pcpp_url" target="_blank">PCPP Link</a>
+                    </div>
+                    <div class="component" *ngIf="computer.components.case">
+                        <img *ngIf="computer.components.case.image_url" [src]="computer.components.case.image_url" alt="{{ computer.components.case.name }}" class="component-image" />
+                        <strong>Case: {{ computer.components.case.name }} - ${{ computer.components.case.price }}</strong>
+                        <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.case.pcpp_url" [href]="computer.components.case.pcpp_url" target="_blank">PCPP Link</a>
+                    </div>
+                    <div>
+                        <button mat-stroked-button color="primary" (click)="onDelete(computer)">
+                            Delete
+                        </button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

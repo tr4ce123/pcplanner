@@ -1,3 +1,7 @@
-<div class="container">
-  <app-home></app-home> 
-</div>
+<mat-toolbar color="primary">
+  <span class="app-title">PC Planner</span>
+  <span class="example-spacer"></span>
+  <button mat-button routerLink="/home">Home</button>
+  <button mat-button routerLink="/builder">Builder</button>
+</mat-toolbar>
+<router-outlet></router-outlet>

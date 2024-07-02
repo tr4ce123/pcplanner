@@ -1,83 +1,23 @@
-
-/* Style for the title in the toolbar */
-.app-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-left: 16px;
-}
-
-.example-spacer {
-  flex: 1 1 auto;
-}
-
-.container {
+.home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px; 
-  box-sizing: border-box;
+  padding: 20px;
+  gap: 20px;
 }
 
-.preference-form-card {
+.welcome-card, .info-card {
   width: 100%;
-  max-width: 95%; 
-  margin-bottom: 20px;
-  padding: 16px;
+  max-width: 600px;
 }
 
-.form-field {
-  padding: 10px;
-}
-
-mat-grid-list {
-  width: 100%;
-}
-
-mat-grid-tile {
+.button-container {
   display: flex;
   justify-content: center;
-  overflow: hidden;
-
+  margin-top: 20px;
 }
 
-mat-sidenav {
-  width: 100px; 
-}
-
-
-@media (max-width: 768px) {
-  .example-container {
-      margin-top: 56px; 
-      height: calc(100vh - 56px);
-  }
-
-  .app-toolbar {
-      height: 56px; 
-  }
-}
-
-.computer-card {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: fit-content;
-  padding: 10px;
-  overflow: hidden;
-}
-
-.component {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.component-image {
-  width: 50px;
-  height: auto;
-  margin-right: 10px;
-}
-
-.pcpp-link-button {
-  margin-left: auto;
+.start-button {
+  font-size: 1.5rem;
+  padding: 15px 30px;
 }

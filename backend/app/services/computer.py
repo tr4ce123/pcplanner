@@ -40,6 +40,10 @@ class ComputerService:
             elif chipset == "amd":
                 # AM5 is most relevant
                 queryset = queryset.filter(specs__contains={"Socket": ["AM5"]})
+            # elif chipset == "amd" and budget < 1000:
+            #     # AM4 is most relevant
+            #     queryset = queryset.filter(specs__contains={"Socket": ["AM4"]})
+            
 
 
             # Usage Specifications
