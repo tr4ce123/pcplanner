@@ -1,9 +1,33 @@
-.app-title {
+/* .app-title {
     font-size: 20px;
     font-weight: bold;
     margin-left: 16px;
-  }
+    color: white;
+  } */
+
+.app-logo {
+    height: 50px; /* Adjust size as needed */
+    margin-left: 16px;
+}
+  
   
 .example-spacer {
     flex: 1 1 auto;
 }
+
+.toolbar {
+    width: 100%;
+    background-color: black;
+    height: 80px;
+}
+
+.nav-button {
+    color: white !important;
+    border: 2px solid transparent; 
+    transition: border-color 0.5s;
+}
+
+.nav-button:hover {
+    border-color: skyblue !important;
+  }
+  

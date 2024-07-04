@@ -25,11 +25,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
+import { EasyBuilderComponent } from './easy-builder/easy-builder.component';
 
 @NgModule({ declarations: [
         AppComponent,
         HomeComponent,
-        BuilderComponent
+        BuilderComponent,
+        EasyBuilderComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         FormsModule,

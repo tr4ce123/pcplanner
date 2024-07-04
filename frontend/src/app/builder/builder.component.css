@@ -11,6 +11,35 @@
     max-width: 95%; 
     margin-bottom: 20px;
     padding: 16px;
+    background-color: #27272a;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon {
+    color: white;
+    background-color: #8b5cf6;
+}
+
+/* .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #87ceeb !important; 
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-thick {
+  border-color: #87ceeb !important; 
+} */
+
+
+.submit-button {
+  background-color: #8b5cf6; 
+  color: white;
+  transition: background-color 0.5s;
+}
+
+.submit-button:hover {
+  background-color: #7c3aed;
+}
+
+  .stepper {
+    background-color: #27272a;
   }
   
   .form-field {
@@ -26,10 +55,6 @@
     justify-content: center;
     overflow: hidden;
   
-  }
-  
-  mat-sidenav {
-    width: 100px; 
   }
   
   
@@ -70,3 +95,13 @@
     margin-left: auto;
   }
   
+  @media (max-width: 768px) {
+    .preference-form-card {
+      width: 100%;
+      margin: 0;
+    }
+  
+    .mat-stepper-horizontal {
+      flex-direction: column;
+    }
+  }
