@@ -52,13 +52,13 @@ export class BuilderComponent implements OnInit{
         budget: [, Validators.required]
       });
       this.usageFormGroup = this.formBuilder.group({
-        usage: ['', Validators.required]
+        usage: ['']
       });
       this.chipsetFormGroup = this.formBuilder.group({
-        chipset: ['', Validators.required]
+        chipset: ['']
       });
       this.wifiFormGroup = this.formBuilder.group({
-        need_wifi: [true, Validators.required]
+        need_wifi: [true]
       });
   
       this.onResize(); 

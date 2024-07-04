@@ -14,6 +14,19 @@ html, body {
 mat-card {
     background-color: #bcbcbc;
 }
+
+.mat-stepper-next,
+.mat-stepper-previous {
+  color: white !important;
+  border: 2px solid transparent !important; 
+  transition: border-color 0.3s;
+}
+
+.mat-stepper-next:hover,
+.mat-stepper-previous:hover {
+  border-color: skyblue !important;
+}
+
 // @mixin global-styles($theme) {
 //     p {
 //         font: mat.get-theme-typography($theme, body-medium, font);

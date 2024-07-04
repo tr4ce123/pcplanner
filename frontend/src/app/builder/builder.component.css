@@ -19,6 +19,25 @@
     background-color: #8b5cf6;
 }
 
+/* .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #87ceeb !important; 
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-thick {
+  border-color: #87ceeb !important; 
+} */
+
+
+.submit-button {
+  background-color: #8b5cf6; 
+  color: white;
+  transition: background-color 0.5s;
+}
+
+.submit-button:hover {
+  background-color: #7c3aed;
+}
+
   .stepper {
     background-color: #27272a;
   }

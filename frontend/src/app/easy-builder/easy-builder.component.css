@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+.preference-form-card {
+    width: 100%;
+    max-width: 95%; 
+    margin-bottom: 20px;
+    padding: 16px;
+    background-color: #27272a;
+  }
+
+  mat-grid-list {
+    width: 100%;
+  }
+  
+  mat-grid-tile {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  
+  }
+
+  .computer-card {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
+    overflow: hidden;
+  }
+  
+  .component {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .component-image {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .pcpp-link-button {
+    margin-left: auto;
+  }
+
+  .submit-button {
+    background-color: #8b5cf6; 
+    color: white;
+    transition: background-color 0.5s;
+  }
+  
+  .submit-button:hover {
+    background-color: #7c3aed;
+  }
+  

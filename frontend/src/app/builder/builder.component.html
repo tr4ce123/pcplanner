@@ -1,6 +1,6 @@
 <div class="container">
     <mat-card appearance="outlined" class="preference-form-card">
-        <mat-stepper class="stepper" [orientation]="stepperOrientation" [linear]="false" #stepper>
+        <mat-stepper class="stepper" [orientation]="stepperOrientation" [linear]="true" #stepper>
             <mat-step [stepControl]="budgetFormGroup">
                 <form [formGroup]="budgetFormGroup">
                     <ng-template matStepLabel>How much are you willing to spend?</ng-template>
@@ -87,7 +87,7 @@
                 </div>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="onSubmit()">Create my PC</button>
+                    <button mat-button class="submit-button" (click)="onSubmit()">Create my PC</button>
                 </div>
             </mat-step>
         </mat-stepper>
