@@ -6,6 +6,7 @@ import { BuilderService } from './builder.service';
 import { ActivatedRoute, Route } from '@angular/router';
 import { HostListener } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 @Component({
   selector: 'app-builder',
   templateUrl: './builder.component.html',
@@ -18,6 +19,8 @@ export class BuilderComponent implements OnInit{
   }
 
   @ViewChild('stepper') stepper!: MatStepper;
+  stepperOrientation: 'horizontal' | 'vertical' = 'horizontal';
+
 
   aiResponses: AIResponse[] = [];
   computers: Computer[] = [];
@@ -37,6 +40,7 @@ export class BuilderComponent implements OnInit{
     protected formBuilder: FormBuilder,
     protected snackBar: MatSnackBar,
     private route: ActivatedRoute,
+    private breakpointObserver: BreakpointObserver
     ) {
       // const data = this.route.snapshot.data as {
       //   computers: Computer[];
@@ -58,6 +62,10 @@ export class BuilderComponent implements OnInit{
       });
   
       this.onResize(); 
+      this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+        this.stepperOrientation = result.matches ? 'vertical' : 'horizontal';
+      });
+  
     }
 
   ngOnInit(): void {

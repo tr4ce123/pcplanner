@@ -1,23 +1,97 @@
-.home-container {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  gap: 20px;
-}
-
-.welcome-card, .info-card {
-  width: 100%;
-  max-width: 600px;
-}
-
-.button-container {
-  display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 2.5rem;
 }
 
-.start-button {
-  font-size: 1.5rem;
-  padding: 15px 30px;
+.container h1 {
+  font-size: 2.25rem; 
+  font-weight: bold;
+  color: #60a5fa;
+  margin-bottom: 1rem; 
+}
+
+.container p {
+  font-size: 1.125rem; 
+  color: #d1d5db; 
+  margin-bottom: 2rem;
+  text-align: center;
+  max-width: 32rem; 
+}
+
+.container button {
+  background-color: #8b5cf6; 
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.container button:hover {
+  background-color: #7c3aed;
+}
+
+.how-it-works {
+  color: white;
+  padding-bottom: 3rem;
+}
+
+.how-it-works .content {
+  max-width: 56rem; 
+  margin-left: auto; 
+  margin-right: auto; 
+  padding-left: 1rem; 
+  padding-right: 1rem; 
+}
+
+.how-it-works h1 {
+  font-size: 2.25rem; 
+  font-weight: bold;
+  color: #60a5fa; 
+  margin-bottom: 2rem; 
+  text-align: center;
+}
+
+.how-it-works .step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem; 
+}
+
+.how-it-works .step-number {
+  flex-shrink: 0;
+  height: 3rem;
+  width: 3rem; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8b5cf6; 
+  border-radius: 9999px; 
+}
+
+.how-it-works .step-number span {
+  color: white;
+  font-weight: bold;
+  font-size: 1.125rem; 
+}
+
+.how-it-works .step-details {
+  margin-left: 1rem;
+}
+
+.how-it-works .step-details h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #60a5fa; 
+  margin-bottom: 0.5rem; 
+}
+
+.how-it-works .step-details p {
+  font-size: 1.125rem;
+  color: #d1d5db; 
+}
+
+.divider {
+  width: 80%;
+  margin: 3rem auto;
 }

@@ -1,32 +1,40 @@
-<div class="home-container">
-    <mat-card appearance="outlined" class="welcome-card">
-      <mat-card-header>
-        <mat-card-title>Welcome to PC Planner</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>
-          Use this tool to get the best computer components based on your budget and preferences. Click the button below to get started!
-        </p>
-        <div class="button-container">
-          <button mat-raised-button color="primary" [routerLink]="['/builder']" class="start-button">
-            Start Building Your PC
-          </button>
+<div class="container">
+    <h1>Welcome To PCPlanner</h1>
+    <p>Use this tool to get the best computer components based on your budget and preferences. Click the button below to get started!</p>
+    <button mat-button [routerLink]="['/builder']">Start Building Your PC</button>
+</div>
+
+<mat-divider class="divider"></mat-divider>
+
+<div class="how-it-works">
+    <div class="content">
+      <h1>How It Works</h1>
+      <div class="step">
+        <div class="step-number">
+          <span>1</span>
         </div>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card appearance="outlined" class="info-card">
-      <mat-card-header>
-        <mat-card-title>How it Works</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>
-          1. Enter your budget.<br>
-          2. Select your usage (e.g., Gaming, Productivity).<br>
-          3. Choose your preferred chipset (Intel or AMD).<br>
-          4. Indicate whether you need wireless connectivity.<br>
-          5. Review the generated components and create your PC.
-        </p>
-      </mat-card-content>
-    </mat-card>
+        <div class="step-details">
+          <h3>Tell Us Your Budget</h3>
+          <p>Start by entering your budget for the PC build. We'll recommend components that fit your price range.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">
+          <span>2</span>
+        </div>
+        <div class="step-details">
+          <h3>Select Your Preferences</h3>
+          <p>Choose your preferred brand, performance level, and other specifications to customize your PC build.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">
+          <span>3</span>
+        </div>
+        <div class="step-details">
+          <h3>Get Your Recommendations</h3>
+          <p>Based on your budget and preferences, we'll provide you with a list of recommended components for your PC build.</p>
+        </div>
+      </div>
+    </div>
   </div>

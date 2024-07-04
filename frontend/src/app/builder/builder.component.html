@@ -1,6 +1,6 @@
 <div class="container">
     <mat-card appearance="outlined" class="preference-form-card">
-        <mat-stepper orientation="horizontal" [linear]="false" #stepper>
+        <mat-stepper class="stepper" [orientation]="stepperOrientation" [linear]="false" #stepper>
             <mat-step [stepControl]="budgetFormGroup">
                 <form [formGroup]="budgetFormGroup">
                     <ng-template matStepLabel>How much are you willing to spend?</ng-template>

@@ -11,6 +11,16 @@
     max-width: 95%; 
     margin-bottom: 20px;
     padding: 16px;
+    background-color: #27272a;
+  }
+
+  ::ng-deep .mat-step-header .mat-step-icon {
+    color: white;
+    background-color: #8b5cf6;
+}
+
+  .stepper {
+    background-color: #27272a;
   }
   
   .form-field {
@@ -26,10 +36,6 @@
     justify-content: center;
     overflow: hidden;
   
-  }
-  
-  mat-sidenav {
-    width: 100px; 
   }
   
   
@@ -70,3 +76,13 @@
     margin-left: auto;
   }
   
+  @media (max-width: 768px) {
+    .preference-form-card {
+      width: 100%;
+      margin: 0;
+    }
+  
+    .mat-stepper-horizontal {
+      flex-direction: column;
+    }
+  }

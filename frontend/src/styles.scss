@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@use 'm3-theme.scss' as theme;
+// @use 'm3-theme.scss' as theme;
 
 @include mat.core();
 
@@ -7,62 +7,67 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color:  #27272a;
+  color: #eeeeee;
 }
 
-@mixin global-styles($theme) {
-    p {
-        font: mat.get-theme-typography($theme, body-medium, font);
-    }
-
-    .primary-background {
-        background: mat.get-theme-color($theme, primary) !important;
-        color: mat.get-theme-color($theme, on-primary) !important;
-    }
-
-    .primary-background-color {
-        background-color: mat.get-theme-color($theme, primary) !important;
-        color: mat.get-theme-color($theme, on-primary) !important;
-    }
-
-    .primary-color {
-        color: mat.get-theme-color($theme, primary) !important;
-    }
-
-    .secondary-background {
-        background: mat.get-theme-color($theme, secondary) !important;
-        color: mat.get-theme-color($theme, on-secondary) !important;
-    }
-
-    .secondary-background-color {
-        background-color: mat.get-theme-color($theme, secondary) !important;
-        color: mat.get-theme-color($theme, on-secondary) !important;
-    }
-
-    .secondary-color {
-        color: mat.get-theme-color($theme, secondary) !important;
-    }
-
-    .tertiary-background {
-        background: mat.get-theme-color($theme, tertiary) !important;
-        color: mat.get-theme-color($theme, on-tertiary) !important;
-    }
-
-    .tertiary-background-color {
-        background-color: mat.get-theme-color($theme, tertiary) !important;
-        color: mat.get-theme-color($theme, on-tertiary) !important;
-    }
-
-    .tertiary-color {
-        color: mat.get-theme-color($theme, tertiary) !important;
-    }
+mat-card {
+    background-color: #bcbcbc;
 }
+// @mixin global-styles($theme) {
+//     p {
+//         font: mat.get-theme-typography($theme, body-medium, font);
+//     }
 
-@mixin apply-styles($theme) {
-    @include global-styles($theme);
-}
+//     .primary-background {
+//         background: mat.get-theme-color($theme, primary) !important;
+//         color: mat.get-theme-color($theme, on-primary) !important;
+//     }
 
-html {
-    @include mat.all-component-themes(theme.$light-theme);
-    @include apply-styles(theme.$light-theme);
-}
+//     .primary-background-color {
+//         background-color: mat.get-theme-color($theme, primary) !important;
+//         color: mat.get-theme-color($theme, on-primary) !important;
+//     }
+
+//     .primary-color {
+//         color: mat.get-theme-color($theme, primary) !important;
+//     }
+
+//     .secondary-background {
+//         background: mat.get-theme-color($theme, secondary) !important;
+//         color: mat.get-theme-color($theme, on-secondary) !important;
+//     }
+
+//     .secondary-background-color {
+//         background-color: mat.get-theme-color($theme, secondary) !important;
+//         color: mat.get-theme-color($theme, on-secondary) !important;
+//     }
+
+//     .secondary-color {
+//         color: mat.get-theme-color($theme, secondary) !important;
+//     }
+
+//     .tertiary-background {
+//         background: mat.get-theme-color($theme, tertiary) !important;
+//         color: mat.get-theme-color($theme, on-tertiary) !important;
+//     }
+
+//     .tertiary-background-color {
+//         background-color: mat.get-theme-color($theme, tertiary) !important;
+//         color: mat.get-theme-color($theme, on-tertiary) !important;
+//     }
+
+//     .tertiary-color {
+//         color: mat.get-theme-color($theme, tertiary) !important;
+//     }
+// }
+
+// @mixin apply-styles($theme) {
+//     @include global-styles($theme);
+// }
+
+// html {
+//     @include mat.all-component-themes(theme.$light-theme);
+//     @include apply-styles(theme.$light-theme);
+// }
 
