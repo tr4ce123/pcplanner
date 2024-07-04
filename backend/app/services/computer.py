@@ -95,7 +95,7 @@ class ComputerService:
         def get_best_ram(component_type: str, budget: float) -> Component:
             queryset = Component.objects.filter(type=component_type, price__lte=budget)
 
-            if total_budget >= 800:
+            if total_budget > 900:
                 queryset = queryset.filter(specs__contains={"Form Factor": ["288-pin DIMM (DDR5)"]})
             else:
                 queryset = queryset.filter(specs__contains={"Form Factor": ["288-pin DIMM (DDR4)"]})
