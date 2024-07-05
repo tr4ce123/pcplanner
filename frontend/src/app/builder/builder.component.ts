@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AIResponse, Computer, Preferences } from '../models.module';
+import { AIResponse, Computer, Preferences, computerComponent } from '../models.module';
 import { BuilderService } from './builder.service';
 import { ActivatedRoute, Route } from '@angular/router';
 import { HostListener } from '@angular/core';
@@ -73,6 +73,10 @@ export class BuilderComponent implements OnInit{
     this.getComputers();
   }
 
+  ngOnDestroy(): void {
+    this.deleteComputers();
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event?: Event): void {
     this.cols = window.innerWidth <= 768 ? 1 : 2;
@@ -89,6 +93,10 @@ export class BuilderComponent implements OnInit{
       this.computers = data;
       this.isLoading = false;
     });
+  }
+
+  getComponentArray(components: { [key: string]: computerComponent }): computerComponent[] {
+    return Object.values(components);
   }
 
 
@@ -149,4 +157,13 @@ export class BuilderComponent implements OnInit{
     });
   }
 
+  private deleteComputers(): void {
+    if (this.computers.length > 0) {
+      this.computers.forEach(computer => {
+        this.builderService.deleteComputer(computer.id!).subscribe({
+          next: () => {}
+        });
+      });
+    }
+  }
 }

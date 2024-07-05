@@ -1,3 +1,9 @@
+
+.divider {
+  width: 80%;
+  margin: 3rem auto;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -5,10 +11,60 @@
     padding: 16px; 
     box-sizing: border-box;
   }
+
+  .container h1 {
+    font-size: 1.875rem; 
+    line-height: 2.25rem;
+    font-weight: 700; 
+    color: #60a5fa;
+    margin-bottom: 2rem; 
+    margin-top: 2rem;
+  }
+
+  .container h2 {
+    font-size: 1.5rem; 
+    line-height: 2.25rem;
+    font-weight: 700; 
+    color: white;
+    margin-bottom: 0.5rem; 
+  }
+  
+
+  .container p {
+    font-size: 1.125rem; 
+    color: #d1d5db; 
+    margin-bottom: 2rem;
+    text-align: center;
+    max-width: 32rem; 
+  }
+
+  @media (max-width: 768px) {
+    .side-by-side {
+      flex-direction: column;
+    }
+  }
+  
+  .side-by-side {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 80%;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  
+  
+  .centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+  }
   
   .preference-form-card {
     width: 100%;
-    max-width: 95%; 
+    max-width: 100%; 
     margin-bottom: 20px;
     padding: 16px;
     background-color: #27272a;
@@ -45,54 +101,108 @@
   .form-field {
     padding: 10px;
   }
-  
-  mat-grid-list {
-    width: 100%;
+  .custom-pc-section {
+    background-color: #27272a;
+    padding: 1rem;
   }
   
-  mat-grid-tile {
-    display: flex;
-    justify-content: center;
+  .custom-pc-container {
+    max-width: 95%;
+    margin: 0 auto;
+    background-color: #18181b;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-  
+    padding: 1rem; 
+    height: auto;
   }
   
+  .custom-pc-content {
+    padding: 1rem;
+  }
   
-  @media (max-width: 768px) {
-    .example-container {
-        margin-top: 56px; 
-        height: calc(100vh - 56px);
-    }
+  .custom-pc-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #60a5fa;
+  }
   
-    .app-toolbar {
-        height: 56px; 
+  .custom-pc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .custom-pc-grid {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
   
-  .computer-card {
-    margin: 10px;
+  .custom-pc-component {
+    background-color: #2d2d2d;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: fit-content;
-    padding: 10px;
-    overflow: hidden;
+    justify-content: space-between;
   }
   
-  .component {
+
+  .buy-now-button {
+    position: relative;
+    font-size: 0.75rem; 
+    line-height: 1rem;
+    color: white !important;  
+    border: 2px solid;
+    border-color: gray;
+    background-color: transparent; 
+    transition: border-color 0.5s;
+  }
+
+  .buy-now-button:hover {
+    border-color: #8b5cf6 !important;
+  }
+  
+  
+  .component-image-large {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .component-title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .component-type {
+    color: #a1a1a1;
+  }
+  
+  .component-price {
+    color: #38bdf8;
+  }
+  
+  .custom-pc-footer {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
   }
   
-  .component-image {
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
+  .total-price {
+    font-size: 1.125rem;
+    font-weight: 600;
   }
-  
-  .pcpp-link-button {
-    margin-left: auto;
+
+
+  .divider {
+    width: 80%;
+    margin: 3rem auto;
   }
   
   @media (max-width: 768px) {

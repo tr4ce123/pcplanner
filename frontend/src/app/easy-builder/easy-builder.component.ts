@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route } from '@angular/router';
 import { BuilderService } from '../builder/builder.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Computer, Preferences } from '../models.module';
+import { Computer, Preferences, computerComponent } from '../models.module';
 
 @Component({
   selector: 'app-easy-builder',
@@ -11,6 +11,8 @@ import { Computer, Preferences } from '../models.module';
   styleUrl: './easy-builder.component.css'
 })
 export class EasyBuilderComponent implements OnInit{
+  showDetails: boolean = false;
+
   public static Route: Route = {
     path: 'easy-builder',
     component: EasyBuilderComponent,
@@ -34,10 +36,19 @@ export class EasyBuilderComponent implements OnInit{
     this.getComputers();
   }
 
-  getComputers(): void {
-    this.builderService.getComputers().subscribe(computers => {
-      this.computers = computers;
+  ngOnDestroy(): void {
+    this.deleteComputers();
+  }
+
+
+  getComputers() {
+    this.builderService.getComputers().subscribe((data) => {
+      this.computers = data;
     });
+  }
+
+  getComponentArray(components: { [key: string]: computerComponent }): computerComponent[] {
+    return Object.values(components);
   }
 
   onSubmit(): void {
@@ -81,4 +92,20 @@ export class EasyBuilderComponent implements OnInit{
       }
     });
   }
+
+  private deleteComputers(): void {
+    if (this.computers.length > 0) {
+      this.computers.forEach(computer => {
+        this.builderService.deleteComputer(computer.id!).subscribe({
+          next: () => {}
+        });
+      });
+    }
+  }
+
+  toggleDetails(): void {
+    this.showDetails = !this.showDetails;
+  }
+
+
 }
