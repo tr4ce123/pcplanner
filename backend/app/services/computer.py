@@ -8,7 +8,7 @@ class ComputerService:
 
         chipset = wifi = usage = None
 
-        if preferences.chipset and preferences.wifi and preferences.usage:
+        if preferences.chipset and preferences.need_wifi and preferences.usage:
             chipset = preferences.chipset.lower()
             wifi = preferences.need_wifi
             usage = preferences.usage.lower()

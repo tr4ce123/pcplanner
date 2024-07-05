@@ -1,69 +1,57 @@
 <div class="container">
-    <form [formGroup]="budgetFormGroup">
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Budget</mat-label>
-            <input matInput formControlName="budget" required placeholder="Ex. 1000" />
-            <mat-error *ngIf="budgetFormGroup.get('budget')?.hasError('required')">Budget is required</mat-error>
-        </mat-form-field>
-    </form>
-    <button mat-button class="submit-button" (click)="onSubmit()">Create my PC</button>
+    <h1>Notes before you start</h1>
+    <div class="side-by-side">
+        <div class="centered-content">
+            <h2>Time of creation</h2>
+            <p>This website uses data that was last updated in June of 2024. While the data can be updated, it's important to note that it might not be. Pricing can change drastically over just a few short months!</p>
+        </div>
+        <div class="centered-content">
+            <h2>Compatiblity</h2>
+            <p>It is important to note that while PCPlanner checks for compatibility, it is not guaranteed.</p>
+        </div>
+        <div class="centered-content">
+            <h2>Do your own research</h2>
+            <p>This website only serves as a guide to get beginners who have no knowledge started on their track to building a PC. </p>
+        </div>
+    </div>
 
+    <mat-divider class="divider"></mat-divider>
+
+    <h1>Want more customization? Check out the other Builder for more options!</h1>
+    <button mat-button class="notes-button" [routerLink]="['/builder']">Give me more options</button>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <main class="form-container">
+      <h1 class="form-title">Enter your Budget</h1>
+      <form [formGroup]="budgetFormGroup" class="budget-form">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Budget</mat-label>
+          <input matInput formControlName="budget" required placeholder="Ex. 1000" class="budget-input" />
+          <mat-error *ngIf="budgetFormGroup.get('budget')?.hasError('required')">Budget is required</mat-error>
+        </mat-form-field>
+        <button mat-button type="submit" class="submit-button" (click)="onSubmit()">Create my PC</button>
+      </form>
+    </main>
 </div>
 
-
-<mat-grid-list cols="2" rowHeight="1:1" gutterSize="5px">
-    <mat-grid-tile *ngFor="let computer of computers">
-        <mat-card class="computer-card">
-            <mat-card-header>
-                <mat-card-title>{{ computer.name }}: ${{ computer.total_price }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="component" *ngIf="computer.components.cpu">
-                    <img *ngIf="computer.components.cpu.image_url" [src]="computer.components.cpu.image_url" alt="{{ computer.components.cpu.name }}" class="component-image" />
-                    <strong>CPU: {{ computer.components.cpu.name }} - ${{ computer.components.cpu.price }}</strong>
-                    <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.cpu.pcpp_url" [href]="computer.components.cpu.pcpp_url" target="_blank">PCPP Link</a>
-                </div>
-                <div class="component" *ngIf="computer.components.cpuCooler">
-                    <img *ngIf="computer.components.cpuCooler.image_url" [src]="computer.components.cpuCooler.image_url" alt="{{ computer.components.cpuCooler.name }}" class="component-image" />
-                    <strong>CPU Cooler: {{ computer.components.cpuCooler.name }} - ${{ computer.components.cpuCooler.price }}</strong>
-                    <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.cpuCooler.pcpp_url" [href]="computer.components.cpuCooler.pcpp_url" target="_blank">PCPP Link</a>
-                </div>
-                <div class="component" *ngIf="computer.components.gpu">
-                    <img *ngIf="computer.components.gpu.image_url" [src]="computer.components.gpu.image_url" alt="{{ computer.components.gpu.name }}" class="component-image" />
-                    <strong>GPU: {{ computer.components.gpu.name }} - ${{ computer.components.gpu.price }}</strong>
-                    <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.gpu.pcpp_url" [href]="computer.components.gpu.pcpp_url" target="_blank">PCPP Link</a>
-                </div>
-                <div class="component" *ngIf="computer.components.motherboard">
-                    <img *ngIf="computer.components.motherboard.image_url" [src]="computer.components.motherboard.image_url" alt="{{ computer.components.motherboard.name }}" class="component-image" />
-                    <strong>Motherboard: {{ computer.components.motherboard.name }} - ${{ computer.components.motherboard.price }}</strong>
-                    <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.motherboard.pcpp_url" [href]="computer.components.motherboard.pcpp_url" target="_blank">PCPP Link</a>
-                </div>
-                <div class="component" *ngIf="computer.components.ram">
-                    <img *ngIf="computer.components.ram.image_url" [src]="computer.components.ram.image_url" alt="{{ computer.components.ram.name }}" class="component-image" />
-                    <strong>RAM: {{ computer.components.ram.name }} - ${{ computer.components.ram.price }}</strong>
-                    <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.ram.pcpp_url" [href]="computer.components.ram.pcpp_url" target="_blank">PCPP Link</a>
-                </div>
-                <div class="component" *ngIf="computer.components.psu">
-                    <img *ngIf="computer.components.psu.image_url" [src]="computer.components.psu.image_url" alt="{{ computer.components.psu.name }}" class="component-image" />
-                    <strong>PSU: {{ computer.components.psu.name }} - ${{ computer.components.psu.price }}</strong>
-                    <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.psu.pcpp_url" [href]="computer.components.psu.pcpp_url" target="_blank">PCPP Link</a>
-                </div>
-                <div class="component" *ngIf="computer.components.storage">
-                    <img *ngIf="computer.components.storage.image_url" [src]="computer.components.storage.image_url" alt="{{ computer.components.storage.name }}" class="component-image" />
-                    <strong>Storage: {{ computer.components.storage.name }} - ${{ computer.components.storage.price }}</strong>
-                    <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.storage.pcpp_url" [href]="computer.components.storage.pcpp_url" target="_blank">PCPP Link</a>
-                </div>
-                <div class="component" *ngIf="computer.components.case">
-                    <img *ngIf="computer.components.case.image_url" [src]="computer.components.case.image_url" alt="{{ computer.components.case.name }}" class="component-image" />
-                    <strong>Case: {{ computer.components.case.name }} - ${{ computer.components.case.price }}</strong>
-                    <a mat-flat-button class="pcpp-link-button" *ngIf="computer.components.case.pcpp_url" [href]="computer.components.case.pcpp_url" target="_blank">PCPP Link</a>
-                </div>
-                <div>
-                    <button mat-stroked-button color="primary" (click)="onDelete(computer)">
-                        Delete
-                    </button>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+<section class="custom-pc-section">
+<div class="custom-pc-container" *ngFor="let computer of computers">
+    <div class="custom-pc-content">
+    <h2 class="custom-pc-title">{{ computer.name }}</h2>
+    <div class="custom-pc-grid">
+        <div *ngFor="let component of getComponentArray(computer.components)" class="custom-pc-component">
+        <h3 class="component-title">{{ component.type }}</h3>
+        <img *ngIf="component.image_url" [src]="component.image_url" alt="{{ component.name }}" class="component-image-large" />
+        <p class="component-name">{{ component.name }}</p>
+        <p class="component-price">${{ component.price }}</p>
+        <a mat-button class="buy-now-button" [href]="component.pcpp_url" target="_blank">Buy Now</a>
+        </div>
+    </div>
+    <div class="custom-pc-footer">
+        <span class="total-price">Total Price: ${{ computer.total_price }}</span>
+        <button mat-stroked-button class="buy-now-button" (click)="onDelete(computer)">Delete</button>
+    </div>
+    </div>
+</div>
+</section>
