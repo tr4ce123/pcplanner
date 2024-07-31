@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "app",
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:4200", "https://tr4ce123.github.io"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:4200", "https://tr4ce123.github.io", "thepcplanner.com"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
