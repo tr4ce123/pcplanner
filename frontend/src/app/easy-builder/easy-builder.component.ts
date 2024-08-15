@@ -4,14 +4,35 @@ import { Route } from '@angular/router';
 import { BuilderService } from '../builder/builder.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Computer, Preferences, computerComponent } from '../models.module';
+import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations'
 
 @Component({
   selector: 'app-easy-builder',
   templateUrl: './easy-builder.component.html',
-  styleUrl: './easy-builder.component.css'
+  styleUrl: './easy-builder.component.css',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(200, [
+            animate('1s', style({ opacity: 1 }))
+          ])
+        ], { optional: true })
+      ])
+    ]),
+    trigger('fadeIn', [
+      transition(':enter', [ // On enter
+        style({ opacity: 0 }),
+        animate('1s', style({ opacity: 1 })) // Fade in over 1 second
+      ])
+    ])
+  ]
 })
+
 export class EasyBuilderComponent implements OnInit{
   showDetails: boolean = false;
+  justCreated: boolean = false;
 
   public static Route: Route = {
     path: 'easy-builder',
@@ -44,6 +65,10 @@ export class EasyBuilderComponent implements OnInit{
   getComputers() {
     this.builderService.getComputers().subscribe((data) => {
       this.computers = data;
+      if (this.computers.length && this.justCreated) {
+        setTimeout(() => this.scrollToNewComputer(), 10); 
+        this.justCreated = false;
+      }  
     });
   }
 
@@ -52,17 +77,16 @@ export class EasyBuilderComponent implements OnInit{
   }
 
   onSubmit(): void {
-    if (
-      this.budgetFormGroup.valid
-    ) {
+    if (this.budgetFormGroup.valid) {
       const budget = this.budgetFormGroup.value.budget;
-
+    
       this.builderService.createPreference(budget, null, null, null).subscribe({
         next: (newPreference: Preferences) => {
           this.budgetFormGroup.reset();
-
+    
           this.builderService.createComputer(newPreference.id!).subscribe({
             next: () => {
+              this.justCreated = true; // Set flag to true when a new computer is created
               this.getComputers();
               this.snackBar.open('Computer created successfully!', '', { duration: 2000 });
             },
@@ -78,8 +102,9 @@ export class EasyBuilderComponent implements OnInit{
     } else {
       this.snackBar.open('Form is invalid!', '', { duration: 2000 });
     }
-
   }
+  
+  
 
   onDelete(computer: Computer) {
     this.builderService.deleteComputer(computer.id!).subscribe({
@@ -107,5 +132,10 @@ export class EasyBuilderComponent implements OnInit{
     this.showDetails = !this.showDetails;
   }
 
+  private scrollToNewComputer(): void {
+    const computerComponents = document.querySelectorAll('.custom-pc-container');
+    const lastComputerComponent = computerComponents[computerComponents.length - 1];
+    lastComputerComponent.scrollIntoView({ behavior: 'smooth' });
 
+  }
 }

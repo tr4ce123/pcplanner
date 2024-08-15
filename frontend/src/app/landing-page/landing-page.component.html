@@ -1,0 +1,7 @@
+<div class="background-image">
+    <div class="content-container">
+      <h1 class="centered-text">{{ typedText }}</h1>
+      <p *ngIf="showButton" [@fadeIn] class="description-text">Design and build your PC with ease.</p> 
+      <button *ngIf="showButton" mat-button class="get-started-button" [@fadeIn] [routerLink]="['/home']">Learn More</button>
+    </div>
+  </div>

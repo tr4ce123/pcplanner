@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BuilderComponent } from './builder/builder.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
@@ -26,12 +28,15 @@ import { MatStepperModule } from '@angular/material/stepper'
 import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { EasyBuilderComponent } from './easy-builder/easy-builder.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({ declarations: [
         AppComponent,
         HomeComponent,
         BuilderComponent,
-        EasyBuilderComponent
+        EasyBuilderComponent,
+        LandingPageComponent,
+        AboutComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         FormsModule,
@@ -51,7 +56,8 @@ import { EasyBuilderComponent } from './easy-builder/easy-builder.component';
         MatProgressBarModule,
         MatStepperModule,
         MatListModule,
-        MatSidenavModule
+        MatSidenavModule,
+        BrowserAnimationsModule
     ], providers: [
         provideAnimationsAsync(),
         provideHttpClient(withInterceptorsFromDi())

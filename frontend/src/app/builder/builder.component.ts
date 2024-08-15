@@ -7,10 +7,30 @@ import { ActivatedRoute, Route } from '@angular/router';
 import { HostListener } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations'
+
 @Component({
   selector: 'app-builder',
   templateUrl: './builder.component.html',
-  styleUrl: './builder.component.css'
+  styleUrl: './builder.component.css',
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(200, [
+            animate('1s', style({ opacity: 1 }))
+          ])
+        ], { optional: true })
+      ])
+    ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('1s', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class BuilderComponent implements OnInit{
   public static Route: Route = {
@@ -33,6 +53,7 @@ export class BuilderComponent implements OnInit{
   cols!: number;
   isLoading: boolean = false;
   opened: boolean = false;
+  justCreated: boolean = false;
   // preferences: Preferences[] = [];
   
   constructor(
@@ -92,6 +113,10 @@ export class BuilderComponent implements OnInit{
     this.builderService.getComputers().subscribe((data) => {
       this.computers = data;
       this.isLoading = false;
+      if (this.computers.length && this.justCreated) {
+        setTimeout(() => this.scrollToNewComputer(), 10); 
+        this.justCreated = false;
+      }  
     });
   }
 
@@ -124,6 +149,7 @@ export class BuilderComponent implements OnInit{
 
           this.builderService.createComputer(newPreference.id!).subscribe({
             next: () => {
+              this.justCreated = true;
               this.getComputers();
               this.snackBar.open('Computer created successfully!', '', { duration: 2000 });
             },
@@ -165,5 +191,12 @@ export class BuilderComponent implements OnInit{
         });
       });
     }
+  }
+
+  private scrollToNewComputer(): void {
+    const computerComponents = document.querySelectorAll('.custom-pc-container');
+    const lastComputerComponent = computerComponents[computerComponents.length - 1];
+    lastComputerComponent.scrollIntoView({ behavior: 'smooth' });
+
   }
 }

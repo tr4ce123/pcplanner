@@ -1,11 +1,13 @@
-<mat-toolbar class="toolbar">
-  <a routerLink="/home">
+<mat-toolbar *ngIf="showToolbar" class="toolbar">
+  <a routerLink="/welcome">
     <img src="https://i.ibb.co/1GnQ2jM/Screenshot-2024-07-03-at-8-55-10-PM.png" alt="PC Planner" class="app-logo">
   </a>
   <span class="example-spacer"></span>
   <button  mat-button routerLink="/home" class="nav-button">Home</button>
   <button  mat-button routerLink="/easy-builder" class="nav-button">Easy Builder</button>
   <button  mat-button routerLink="/builder" class="nav-button builder-button">Builder</button>
+  <!-- <button  mat-button routerLink="/about" class="nav-button builder-button">About</button> -->
+
 </mat-toolbar>
 <div class="content">
   <router-outlet></router-outlet>
