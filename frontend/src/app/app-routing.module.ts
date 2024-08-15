@@ -4,15 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BuilderComponent } from './builder/builder.component';
 import { EasyBuilderComponent } from './easy-builder/easy-builder.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AboutComponent } from './about/about.component'
 
 const routes: Routes = [
   // Default is home
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: '', redirectTo: '/welcome', pathMatch: 'full'},
   // Undefined routes go back to home
   // { path: '**', redirectTo: '/home' },
   HomeComponent.Route,
   BuilderComponent.Route,
-  EasyBuilderComponent.Route
+  EasyBuilderComponent.Route,
+  LandingPageComponent.Route,
+  AboutComponent.Route
 ]
 
 @NgModule({

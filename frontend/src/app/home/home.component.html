@@ -1,19 +1,19 @@
 <div class="banner"></div>
 
 <div class="container">
-  <div class="welcome-section">
+  <div class="welcome-section" @fadeIn>
     <div class="centered-content">
       <h1>Welcome To PCPlanner</h1>
       <p>Use this tool to get the best computer components based on your budget and preferences. Click the button below to get started!</p>
     </div>
   </div>
-    <div class="side-by-side">
+    <div class="side-by-side" @fadeIn>
       <div class="centered-content">
           <h2>For Beginners</h2>
           <p>Use the Easy Builder to simply put in your budget and get instant results.</p>
           <button mat-button [routerLink]="['/easy-builder']">Start Building Your PC</button>
       </div>
-      <div class="centered-content">
+      <div class="centered-content" @fadeIn>
           <h2>Want More Customization?</h2>
           <p>Use the Builder to add a few specifications to your PC such as the chipset, usage, and network options. </p>
           <button mat-button [routerLink]="['/builder']">Start Building Your PC</button>
@@ -26,7 +26,7 @@
 <div class="how-it-works">
     <div class="content">
       <h1>How It Works</h1>
-      <div class="step">
+      <div class="step" @fadeIn *ngIf="isVisibleStep1" id="step1">
         <div class="step-number">
           <span>1</span>
         </div>
@@ -35,7 +35,7 @@
           <p>Start by entering your budget for the PC build. We'll recommend components that fit your price range.</p>
         </div>
       </div>
-      <div class="step">
+      <div class="step" @fadeIn *ngIf="isVisibleStep2" id="step2">
         <div class="step-number">
           <span>2</span>
         </div>
@@ -44,7 +44,7 @@
           <p>Choose your preferred brand, performance level, and other specifications to customize your PC build.</p>
         </div>
       </div>
-      <div class="step">
+      <div class="step" @fadeIn *ngIf="isVisibleStep3" id="step3">
         <div class="step-number">
           <span>3</span>
         </div>
@@ -58,7 +58,7 @@
 
 <mat-divider class="divider"></mat-divider>
 
-<div class="why-container">
+<div class="why-container" @fadeIn>
   <h1>Why PCPlanner?</h1>
   <p>The #1 consideration when building a personal computer is how much it will cost. That's why I built PCPlanner. The goal of this website is to streamline the process of spending countless hours of research to find the best PC for your budget. Instead, simply specify how much you're willing to spend, and PCPlanner does the rest!</p>
   <p>PCPlanner uses an algorithm to navigate through a database of over 3,000 components. Using the power of ChatGPT's 4o model, you'll also be given each computer's tradeoffs and plans for future proofing. </p>

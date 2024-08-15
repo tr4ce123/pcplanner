@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../../assets/fonts/nasalization-rg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+.background-image {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;  /* Center vertically */
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/assets/AdobeStock_289813324.jpeg'); /* Ensure correct path */
+    background-size: cover; 
+    background-position: center; 
+    position: relative; /* Needed for the gradient overlay */
+}
+
+.background-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background: radial-gradient(circle, 
+        rgba(0, 115, 255, 0.13) 30%,
+        rgba(141, 1, 255, 0.103) 60%,  
+        rgba(254, 116, 231, 0.118) 100%  
+    ); */
+    background: radial-gradient(circle, 
+        rgba(0, 115, 255, 0.08) 10%, 
+        rgba(0, 115, 255, 0.08) 30%, 
+        rgba(72, 58, 255, 0.08) 50%, 
+        rgba(141, 1, 255, 0.08) 60%, 
+        rgba(197, 59, 243, 0.08) 75%, 
+        rgba(254, 116, 231, 0.08) 100% 
+    );
+
+
+    z-index: 0;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    z-index: 1; 
+    text-align: center;
+}
+
+.centered-text {
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 60px;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    /* 1px 1px 0px #0000ff,
+    2px 2px 0px #00bfff,
+    3px 3px 0px #9703e0,
+    4px 4px 0px #4b0082; */
+    margin-bottom: 20px; 
+}
+
+.description-text {
+    color: white;
+    font-size: 24px;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+    max-width: 80%;  /* Ensures the text doesn't spread too wide on larger screens */
+    text-align: center;
+}
+
+.get-started-button {
+    background-color: black; 
+    color: white !important;
+    transition: background-color 0.5s;
+    padding: 1rem 2rem; 
+    font-size: 1.25rem; 
+}
+
+.get-started-button:hover {
+    background-color: #7c3aed;
+}
+
+  .centered-text::after {
+    content: '|';
+    opacity: 1;
+    margin-left: 5px;
+    display: inline-block;
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }

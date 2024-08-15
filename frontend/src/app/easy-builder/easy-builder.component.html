@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" @fadeIn>
     <h1>Notes before you start</h1>
     <div class="side-by-side">
         <div class="centered-content">
@@ -39,8 +39,8 @@
 <div class="custom-pc-container" *ngFor="let computer of computers">
     <div class="custom-pc-content">
     <h2 class="custom-pc-title">{{ computer.name }}</h2>
-    <div class="custom-pc-grid">
-        <div *ngFor="let component of getComponentArray(computer.components)" class="custom-pc-component">
+    <div class="custom-pc-grid" [@listAnimation]="getComponentArray(computer.components).length">
+        <div *ngFor="let component of getComponentArray(computer.components);" class="custom-pc-component">
         <h3 class="component-title">{{ component.type }}</h3>
         <img *ngIf="component.image_url" [src]="component.image_url" alt="{{ component.name }}" class="component-image-large" />
         <p class="component-name">{{ component.name }}</p>
