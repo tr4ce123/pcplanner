@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'frontend';
 
   showToolbar: boolean = true;
+  showFooter: boolean = true;
 
   @HostBinding('style.--toolbar-margin')
   get toolbarMargin() {
@@ -21,9 +22,11 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.pipe(
       filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd),
-      map(event => event as NavigationEnd) // This cast is now safe
+      map(event => event as NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.showToolbar = !event.urlAfterRedirects.startsWith('/welcome');
+      this.showFooter = !event.urlAfterRedirects.startsWith('/welcome');
+
     });
   }
 

@@ -61,7 +61,6 @@ export class EasyBuilderComponent implements OnInit{
     this.deleteComputers();
   }
 
-
   getComputers() {
     this.builderService.getComputers().subscribe((data) => {
       this.computers = data;
@@ -75,6 +74,8 @@ export class EasyBuilderComponent implements OnInit{
   getComponentArray(components: { [key: string]: computerComponent }): computerComponent[] {
     return Object.values(components);
   }
+
+
 
   onSubmit(): void {
     if (this.budgetFormGroup.valid) {
@@ -118,6 +119,10 @@ export class EasyBuilderComponent implements OnInit{
     });
   }
 
+  toggleDetails(): void {
+    this.showDetails = !this.showDetails;
+  }
+
   private deleteComputers(): void {
     if (this.computers.length > 0) {
       this.computers.forEach(computer => {
@@ -128,9 +133,7 @@ export class EasyBuilderComponent implements OnInit{
     }
   }
 
-  toggleDetails(): void {
-    this.showDetails = !this.showDetails;
-  }
+  
 
   private scrollToNewComputer(): void {
     const computerComponents = document.querySelectorAll('.custom-pc-container');
