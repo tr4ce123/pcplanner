@@ -12,3 +12,21 @@
 <div class="content">
   <router-outlet></router-outlet>
 </div>
+
+<div *ngIf="showFooter" class="footer">
+  <div class="footer-links">
+    <!-- <a href="/about">About</a> -->
+    <a href="/home">Home</a>
+    <a href="/welcome">Landing Page</a>
+    <a href="https://github.com/tr4ce123/pcplanner" target="_blank">Github Repo</a>
+  </div>
+  <div class="footer-socials">
+    <p>My Links:</p>
+    <a href="https://traceglasby.com" target="_blank" class="personal-link">My Personal Website</a>
+    <a href="https://github.com/tr4ce123" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/gglasby04/" target="_blank"><i class="fab fa-linkedin"></i></a>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Gregory Glasby. All rights reserved.</p>
+  </div>
+</div>

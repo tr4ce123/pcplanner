@@ -14,7 +14,7 @@ from pypartpicker import Scraper
 
 load_dotenv()
 client = OpenAI(api_key=os.environ["OPENAI_KEY"])
-scraperAPI = os.environ["SCRAPER_API_KEY"]
+# scraperAPI = os.environ["SCRAPER_API_KEY"]
 
 
 # def scraperapi_response_retriever(url, **kwargs):
@@ -34,6 +34,7 @@ class ChatResponseViewSet(ModelViewSet):
     def create(self, request):
         try:
             preferences_data = request.data.get("preferences")
+            # components = request.data.get("components")
 
             if not isinstance(preferences_data, dict):
                 return Response(
@@ -66,7 +67,7 @@ class ChatResponseViewSet(ModelViewSet):
 
             # Generates the response from GPT 3.5 Turbo model
             response = client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o",
                 messages=[{"role": "user", "content": prompt}],
             )
 
@@ -146,6 +147,6 @@ class ChatResponseViewSet(ModelViewSet):
             )
 
 
-class ComputerViewSet(ModelViewSet):
-    queryset = Computer.objects.all()
-    serializer_class = ComputerSerializer
+# class ComputerViewSet(ModelViewSet):
+#     queryset = Computer.objects.all()
+#     serializer_class = ComputerSerializer
