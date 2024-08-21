@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('../../assets/fonts/nasalization-rg.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .banner {
   position: relative;
   width: 100%;
@@ -15,7 +22,8 @@
 }
 
 .welcome-section {
-  background-color: rgba(24, 28, 74, 0.345); 
+  background: linear-gradient(to right, rgba(138, 43, 226, 0.3), rgba(135, 206, 235, 0.3));
+  /* background-color: black; */
   /* padding: 2rem; */
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -33,6 +41,7 @@
   color: #60a5fa;
   margin-bottom: 1rem; 
   text-align: center;
+  font-family: 'MyCustomFont', sans-serif;
 }
 
 .welcome-section p {
@@ -90,6 +99,8 @@
   margin-bottom: 1rem; 
   margin-top: 1rem;
   text-align: center;
+  font-family: 'MyCustomFont', sans-serif;
+
 }
 
 .container p {
@@ -131,6 +142,8 @@
   color: #60a5fa; 
   margin-bottom: 2rem; 
   text-align: center;
+  font-family: 'MyCustomFont', sans-serif;
+
 }
 
 .how-it-works .step {
@@ -191,6 +204,7 @@
   color: #60a5fa;
   margin-bottom: 1rem; 
   text-align: center;
+  font-family: 'MyCustomFont', sans-serif;
 }
 
 .why-container p {

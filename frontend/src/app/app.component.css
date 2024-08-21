@@ -11,7 +11,7 @@
 
   
 .app-logo {
-    height: 50px; /* Adjust size as needed */
+    height: 50px;
     margin-left: 16px;
 }
   
@@ -32,6 +32,17 @@
     top: 0; 
     left: 0; 
     z-index: 1000; 
+    gap: 5px;
+}
+
+.toolbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #8a2be2, #87ceeb);
 }
 
 .nav-button {
@@ -57,7 +68,6 @@
     text-align: center;
     padding: 20px 0;
     position: relative;
-    flex-shrink: 0;
   }
   
   .footer::after {
@@ -66,7 +76,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 10px;
+    height: 5px;
     background: linear-gradient(to right, #8a2be2, #87ceeb);
   }
   
@@ -76,7 +86,7 @@
     gap: 20px;
     padding: 10px 0;
   }
-  
+
   .footer-links a{
     color: white !important;
     text-decoration: none; 
@@ -92,7 +102,6 @@
   .footer-socials a {
     color: #ffffff;
     font-size: 24px;
-    margin: 0 10px;
   }
   
   .footer-socials a:hover {
