@@ -4,6 +4,13 @@
     margin-left: 16px;
     color: white;
   } */
+  @font-face {
+    font-family: 'MyCustomFont';
+    src: url('../assets/fonts/nasalization-rg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 
 :root {
 --toolbar-margin: 80px;
@@ -49,6 +56,7 @@
     color: white !important;
     border: 2px solid transparent; 
     transition: border-color 0.5s;
+    font-family: MyCustomFont;
 }
 
 .nav-button:hover {
@@ -93,6 +101,8 @@
     border-bottom: 2px solid transparent;
     transition: border-bottom-color 0.5s;
     display: inline;
+    font-family: MyCustomFont;
+
   }
   
   .footer-links a:hover{
