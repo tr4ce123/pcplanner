@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route } from '@angular/router';
 import { BuilderService } from '../builder/builder.service';
@@ -23,9 +23,9 @@ import { map, Observable, startWith } from 'rxjs';
       ])
     ]),
     trigger('fadeIn', [
-      transition(':enter', [ // On enter
+      transition(':enter', [ 
         style({ opacity: 0 }),
-        animate('1s', style({ opacity: 1 })) // Fade in over 1 second
+        animate('1s', style({ opacity: 1 }))
       ])
     ])
   ]
@@ -55,11 +55,15 @@ export class EasyBuilderComponent implements OnInit{
   budgetFormGroup: FormGroup;
   computers: Computer[] = [];
 
+  aiResponseText: string = '';
+  typedText: string = '';
+  private currentIndex = 0;
+  private typingSpeed = 10;
 
   constructor(
     protected formBuilder: FormBuilder,
     private builderService: BuilderService, 
-    protected snackBar: MatSnackBar
+    protected snackBar: MatSnackBar,
   ){
     this.budgetFormGroup = this.formBuilder.group({
       budget: [, Validators.required]
@@ -96,6 +100,10 @@ export class EasyBuilderComponent implements OnInit{
     this.builderService.getComputers().subscribe({
       next: (computers: Computer[]) => {
         this.computers = computers;
+        if (this.computers.length && this.justCreated) {
+          setTimeout(() => this.scrollToNewComputer(), 10); 
+          this.justCreated = false;
+        }
       },
       error: () => {
         this.snackBar.open('Failed to load computers!', '', { duration: 2000 });
@@ -139,10 +147,27 @@ export class EasyBuilderComponent implements OnInit{
     }
   }
 
+  displayAIResponseWithTypewriter(response: string): void {
+    this.aiResponseText = response;
+    this.currentIndex = 0; 
+    this.typedText = ''; 
+    this.typeWriterEffect();
+  }
+
+  private typeWriterEffect(): void {
+    if (this.currentIndex < this.aiResponseText.length) {
+      this.typedText += this.aiResponseText.charAt(this.currentIndex);
+      this.currentIndex++;
+      setTimeout(() => this.typeWriterEffect(), this.typingSpeed);
+    }
+  }
+
+
   submitAIRequest(computer: Computer): void {
     if (this.aiForm.valid) {
       const userPrompt = this.aiForm.value.userPrompt;
       this.isLoading = true;
+      this.aiForm.reset();
       this.builderService.createAIResponse(computer.id, userPrompt).subscribe({
         next: response => {
           const formattedResponse = this.formatAIResponse(response.chat_response.response);
@@ -155,9 +180,11 @@ export class EasyBuilderComponent implements OnInit{
           this.snackBar.open('Insights generated!', '', { duration: 2000 });
           this.toggleAIForm(computer);
           this.isLoading = false;
+          this.displayAIResponseWithTypewriter(formattedResponse);
         },
         error: () => {
           this.snackBar.open('Failed to generate insights!', '', { duration: 2000 });
+          this.isLoading = false;
         }
       });
     }
@@ -165,6 +192,8 @@ export class EasyBuilderComponent implements OnInit{
 
   private formatAIResponse(response: string): string {
     let cleanResponse = response.replace(/\*/g, '');
+    cleanResponse.replace(/\#/g, '');
+
 
     let lines = cleanResponse.split('\n');
   

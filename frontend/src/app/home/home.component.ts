@@ -8,14 +8,14 @@ import { animate, style, transition, trigger } from '@angular/animations'
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({opacity: 0}),
-        animate('2s ease-out', style({opacity: 1})),
-      ], { params: { delay: 0 } }),
-    ]),
-  ],
+  // animations: [
+  //   trigger('fadeIn', [
+  //     transition(':enter', [
+  //       style({opacity: 0}),
+  //       animate('2s ease-out', style({opacity: 1})),
+  //     ], { params: { delay: 0 } }),
+  //   ]),
+  // ],
 })
 export class HomeComponent {
 
@@ -31,21 +31,25 @@ export class HomeComponent {
     ) {
     }
 
-  isVisibleStep1 = false;
-  isVisibleStep2 = false;
-  isVisibleStep3 = false;
-  isVisibleWhy = false;
+  // isVisibleStep1 = false;
+  // isVisibleStep2 = false;
+  // isVisibleStep3 = false;
+  // isVisibleStep4 = false;
+  // isVisibleWhy = false;
 
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll() {
-    const step1Position = document.getElementById('step1')?.getBoundingClientRect().top ?? 0;
-    const step2Position = document.getElementById('step2')?.getBoundingClientRect().top ?? 0;
-    const step3Position = document.getElementById('step3')?.getBoundingClientRect().top ?? 0;
-    const triggerHeight = window.innerHeight * 0.8;
+  // @HostListener('window:scroll', ['$event'])
+  // onWindowScroll() {
+  //   const step1Position = document.getElementById('step1')?.getBoundingClientRect().top ?? 0;
+  //   const step2Position = document.getElementById('step2')?.getBoundingClientRect().top ?? 0;
+  //   const step3Position = document.getElementById('step3')?.getBoundingClientRect().top ?? 0;
+  //   const step4Position = document.getElementById('step4')?.getBoundingClientRect().top ?? 0;
 
-    this.isVisibleStep1 = step1Position < triggerHeight;
-    this.isVisibleStep2 = step2Position < triggerHeight;
-    this.isVisibleStep3 = step3Position < triggerHeight;
-  }
+  //   const triggerHeight = window.innerHeight * 0.9;
+
+  //   this.isVisibleStep1 = step1Position < triggerHeight;
+  //   this.isVisibleStep2 = step2Position < triggerHeight;
+  //   this.isVisibleStep3 = step3Position < triggerHeight;
+  //   this.isVisibleStep4 = step4Position < triggerHeight;
+  // }
 
 }

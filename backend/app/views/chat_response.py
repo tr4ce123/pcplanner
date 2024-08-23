@@ -45,7 +45,10 @@ class ChatResponseViewSet(ModelViewSet):
         ]
 
         component_details = ", ".join(components)
-        detailed_prompt = f"Given a computer with {component_details}, and price {computer.total_price}. Provide a structured, concise response under 200 words to this user's question. User prompt: {user_prompt}."
+        detailed_prompt = f"""Given a computer with {component_details}, and price {computer.total_price}. 
+        Provide a structured, concise response under 200 words to this user's question. 
+        If the user asks for different parts or reconstructed budget include the new total price at the bottom. 
+        If not, don't add it. User prompt: {user_prompt}."""
 
 
         try:

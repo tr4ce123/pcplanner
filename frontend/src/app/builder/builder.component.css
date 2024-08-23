@@ -283,3 +283,17 @@
   color: #60a5fa;
   font-family: MyCustomFont;
 }
+
+.typewriter-text {
+  font-family: 'Monospace', sans-serif;
+  white-space: pre-wrap;
+  font-size: 16px;
+  color: #fff;
+}
+
+.ai-insights-container {
+  background: linear-gradient(to right, rgba(138, 43, 226, 0.1), rgba(135, 206, 235, 0.1));
+  padding: 1rem; 
+  border-radius: 0.5rem; 
+  margin: 1rem 0; 
+}

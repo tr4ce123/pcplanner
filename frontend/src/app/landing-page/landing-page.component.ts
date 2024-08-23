@@ -27,7 +27,7 @@ export class LandingPageComponent {
   typedText = '';
   private fullText = 'Welcome to PCPlanner';
   private currentIndex = 0;
-  private typingSpeed = 150;
+  private typingSpeed = 120;
 
   showButton = false;
 
