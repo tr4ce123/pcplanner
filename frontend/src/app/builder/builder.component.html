@@ -122,18 +122,48 @@
     <div class="custom-pc-container" *ngFor="let computer of computers">
         <div class="custom-pc-content">
         <h2 class="custom-pc-title">{{ computer.name }}</h2>
-        <div class="custom-pc-grid" [@listAnimation]="getComponentArray(computer.components).length">
-            <div *ngFor="let component of getComponentArray(computer.components)" class="custom-pc-component">
-            <h3 class="component-title">{{ component.type }}</h3>
-            <img *ngIf="component.image_url" [src]="component.image_url" alt="{{ component.name }}" class="component-image-large" />
-            <p class="component-name">{{ component.name }}</p>
-            <p class="component-price">${{ component.price }}</p>
-            <a mat-button class="buy-now-button" [href]="component.pcpp_url" target="_blank">Buy Now</a>
+            <div class="custom-pc-grid" [@listAnimation]="getComponentArray(computer.components).length">
+                <div *ngFor="let component of getComponentArray(computer.components);" class="custom-pc-component">
+                    <h3 class="component-title">{{ component.type }}</h3>
+                    <img *ngIf="component.image_url" [src]="component.image_url" alt="{{ component.name }}" class="component-image-large" />
+                    <p class="component-name">{{ component.name }}</p>
+                    <p class="component-price">${{ component.price }}</p>
+                    <a mat-button class="buy-now-button" [href]="component.pcpp_url" target="_blank">Buy Now</a>
+                </div>
             </div>
+    
+        <div *ngIf="computer.aiResponse">
+            <h2 class="insights-title">AI Insights:</h2>
+            <p>{{computer.aiResponse}}</p>
         </div>
         <div class="custom-pc-footer">
             <span class="total-price">Total Price: ${{ computer.total_price }}</span>
-            <button mat-stroked-button class="buy-now-button" (click)="onDelete(computer)">Delete</button>
+            <div class="footer-buttons">
+                <button mat-stroked-button class="delete-button" (click)="onDelete(computer)">Delete</button>
+                <button mat-button class="ai-insights-button" (click)="toggleAIForm(computer)" *ngIf="!computer.showAIForm && computer.aiResponse == null">Build insights using AI</button>
+                <button mat-button class="ai-insights-button" (click)="toggleAIForm(computer)" *ngIf="!computer.showAIForm && computer.aiResponse != null">Ask another question</button>
+            </div>
+        </div>
+        <div *ngIf="computer.showAIForm" class="ai-form-container">
+            <form [formGroup]="aiForm" (ngSubmit)="submitAIRequest(computer)" class="ai-form">
+                <mat-form-field appearance="outline" class="ai-form-field">
+                    <mat-label>Ask a Question</mat-label>
+                    <input matInput placeholder="Suggested prompts below!" formControlName="userPrompt" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        @for (option of filteredOptions | async; track option) {
+                          <mat-option [value]="option">{{option}}</mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
+                <div class="custom-pc-footer">
+                    <div class="footer-buttons">
+                        <button mat-button class="ai-insights-button" type="submit" >Submit</button>
+                        <button mat-button class="ai-insights-button" (click)="toggleAIForm(computer)">Hide</button>
+                    </div>
+                </div>
+                
+            </form>
+            <mat-progress-bar mode="indeterminate" *ngIf="isFormLoading"></mat-progress-bar>
         </div>
         </div>
     </div>

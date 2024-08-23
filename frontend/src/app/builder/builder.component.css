@@ -71,7 +71,6 @@
   
   .preference-form-card {
     width: 100%;
-    max-width: 100%; 
     margin-bottom: 20px;
     padding: 16px;
     background-color: #27272a;
@@ -158,6 +157,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-width: 0;
+    word-wrap: break-word;
     }
   
 
@@ -231,3 +232,54 @@
       flex-direction: column;
     }
   }
+
+
+  .footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.delete-button, .ai-insights-button {
+    font-size: 0.75rem; 
+    line-height: 1rem;
+    color: white;  
+    border: 2px solid;
+    border-color: gray;
+    background-color: transparent; 
+    transition: border-color 0.5s;
+    padding: 0.5rem 1rem;
+    font-family: MyCustomFont;
+    margin-bottom: 10px;
+}
+
+.delete-button:hover, .ai-insights-button:hover {
+    border-color: #8b5cf6;
+}
+
+.ai-form-container {
+    padding: 1rem;
+    background-color: #2d2d2d;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+.ai-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.ai-form-field {
+    width: 100%;
+}
+
+.insights-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #60a5fa;
+  font-family: MyCustomFont;
+}

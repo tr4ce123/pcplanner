@@ -8,6 +8,7 @@ import { HostListener } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations'
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-builder',
@@ -45,6 +46,7 @@ export class BuilderComponent implements OnInit{
   aiResponses: AIResponse[] = [];
   computers: Computer[] = [];
 
+  aiForm: FormGroup;
   budgetFormGroup: FormGroup;
   usageFormGroup: FormGroup;
   chipsetFormGroup: FormGroup;
@@ -54,6 +56,17 @@ export class BuilderComponent implements OnInit{
   isLoading: boolean = false;
   opened: boolean = false;
   justCreated: boolean = false;
+
+  showAIForm: boolean = false;
+  isFormLoading: boolean = false;
+
+  options: string[] = [
+    'What are some changes you would suggest?', 
+    'How can I ensure my computer is future proofed?', 
+    'What games will I be able to play with this build?',
+    'What are some alternative ways I can balance this budget?'
+  ];
+  filteredOptions!: Observable<string[]>;
   // preferences: Preferences[] = [];
   
   constructor(
@@ -81,6 +94,10 @@ export class BuilderComponent implements OnInit{
       this.wifiFormGroup = this.formBuilder.group({
         need_wifi: [true]
       });
+
+      this.aiForm = this.formBuilder.group({
+        userPrompt: ['', Validators.required]
+      });
   
       this.onResize(); 
       this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
@@ -92,6 +109,19 @@ export class BuilderComponent implements OnInit{
   ngOnInit(): void {
     // this.getAIResponses();
     this.getComputers();
+    this.initAutocomplete();
+  }
+  
+  initAutocomplete(): void {
+    this.filteredOptions = this.aiForm.get('userPrompt')!.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)) 
+    );
+  }
+  
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   ngOnDestroy(): void {
@@ -171,6 +201,39 @@ export class BuilderComponent implements OnInit{
 
   }
 
+  submitAIRequest(computer: Computer): void {
+    if (this.aiForm.valid) {
+      const userPrompt = this.aiForm.value.userPrompt;
+      this.isFormLoading = true;
+      this.builderService.createAIResponse(computer.id, userPrompt).subscribe({
+        next: response => {
+          const formattedResponse = this.formatAIResponse(response.chat_response.response);
+          // Find the computer in the local array and update it
+          const index = this.computers.findIndex(c => c.id === computer.id);
+          if (index !== -1) {
+            this.computers[index].aiResponse = formattedResponse;
+            this.computers = [...this.computers];
+          }
+          this.snackBar.open('Insights generated!', '', { duration: 2000 });
+          this.toggleAIForm(computer);
+          this.isFormLoading = false;
+        },
+        error: () => {
+          this.snackBar.open('Failed to generate insights!', '', { duration: 2000 });
+        }
+      });
+    }
+  }
+
+  private formatAIResponse(response: string): string {
+    let cleanResponse = response.replace(/\*/g, '');
+
+    let lines = cleanResponse.split('\n');
+  
+    return lines.join('\n');
+  
+  }
+
   onDelete(computer: Computer) {
     this.builderService.deleteComputer(computer.id!).subscribe({
       next: () => {
@@ -198,5 +261,9 @@ export class BuilderComponent implements OnInit{
     const lastComputerComponent = computerComponents[computerComponents.length - 1];
     lastComputerComponent.scrollIntoView({ behavior: 'smooth' });
 
+  }
+
+  toggleAIForm(computer: Computer): void {
+    computer.showAIForm = !computer.showAIForm;
   }
 }

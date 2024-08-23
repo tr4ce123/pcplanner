@@ -5,6 +5,7 @@ import { BuilderService } from '../builder/builder.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Computer, Preferences, computerComponent } from '../models.module';
 import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations'
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-easy-builder',
@@ -33,12 +34,24 @@ import { trigger, state, style, transition, animate, query, stagger } from '@ang
 export class EasyBuilderComponent implements OnInit{
   showDetails: boolean = false;
   justCreated: boolean = false;
+  showAIForm: boolean = false;
+  isLoading: boolean = false;
+
+  options: string[] = [
+    'What are some changes you would suggest?', 
+    'How can I ensure my computer is future proofed?', 
+    'What games will I be able to play with this build?',
+    'What are some alternative ways I can balance this budget?'
+  ];
+  filteredOptions!: Observable<string[]>;
+
 
   public static Route: Route = {
     path: 'easy-builder',
     component: EasyBuilderComponent,
   }
 
+  aiForm: FormGroup;
   budgetFormGroup: FormGroup;
   computers: Computer[] = [];
 
@@ -51,23 +64,42 @@ export class EasyBuilderComponent implements OnInit{
     this.budgetFormGroup = this.formBuilder.group({
       budget: [, Validators.required]
     });
+    this.aiForm = this.formBuilder.group({
+      userPrompt: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
     this.getComputers();
+    this.initAutocomplete();
   }
+
+  initAutocomplete(): void {
+    this.filteredOptions = this.aiForm.get('userPrompt')!.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)) 
+    );
+  }
+  
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  
+
 
   ngOnDestroy(): void {
     this.deleteComputers();
   }
 
-  getComputers() {
-    this.builderService.getComputers().subscribe((data) => {
-      this.computers = data;
-      if (this.computers.length && this.justCreated) {
-        setTimeout(() => this.scrollToNewComputer(), 10); 
-        this.justCreated = false;
-      }  
+  getComputers(): void {
+    this.builderService.getComputers().subscribe({
+      next: (computers: Computer[]) => {
+        this.computers = computers;
+      },
+      error: () => {
+        this.snackBar.open('Failed to load computers!', '', { duration: 2000 });
+      }
     });
   }
 
@@ -75,7 +107,9 @@ export class EasyBuilderComponent implements OnInit{
     return Object.values(components);
   }
 
-
+  toggleAIForm(computer: Computer): void {
+    computer.showAIForm = !computer.showAIForm;
+  }
 
   onSubmit(): void {
     if (this.budgetFormGroup.valid) {
@@ -104,9 +138,40 @@ export class EasyBuilderComponent implements OnInit{
       this.snackBar.open('Form is invalid!', '', { duration: 2000 });
     }
   }
-  
-  
 
+  submitAIRequest(computer: Computer): void {
+    if (this.aiForm.valid) {
+      const userPrompt = this.aiForm.value.userPrompt;
+      this.isLoading = true;
+      this.builderService.createAIResponse(computer.id, userPrompt).subscribe({
+        next: response => {
+          const formattedResponse = this.formatAIResponse(response.chat_response.response);
+          // Find the computer in the local array and update it
+          const index = this.computers.findIndex(c => c.id === computer.id);
+          if (index !== -1) {
+            this.computers[index].aiResponse = formattedResponse;
+            this.computers = [...this.computers];
+          }
+          this.snackBar.open('Insights generated!', '', { duration: 2000 });
+          this.toggleAIForm(computer);
+          this.isLoading = false;
+        },
+        error: () => {
+          this.snackBar.open('Failed to generate insights!', '', { duration: 2000 });
+        }
+      });
+    }
+  }
+
+  private formatAIResponse(response: string): string {
+    let cleanResponse = response.replace(/\*/g, '');
+
+    let lines = cleanResponse.split('\n');
+  
+    return lines.join('\n');
+  
+  }
+  
   onDelete(computer: Computer) {
     this.builderService.deleteComputer(computer.id!).subscribe({
       next: () => {

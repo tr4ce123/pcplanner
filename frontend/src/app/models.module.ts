@@ -34,4 +34,6 @@ export interface Computer {
     case: computerComponent;
   }
   total_price: number;
+  showAIForm: boolean;
+  aiResponse: string;
 }

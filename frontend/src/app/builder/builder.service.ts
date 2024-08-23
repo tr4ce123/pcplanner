@@ -8,8 +8,8 @@ import { AIResponse, Computer, Preferences, computerComponent } from '../models.
 })
 export class BuilderService {
 
-  apiUrl = 'https://pcplanner-production.up.railway.app/api/';
-  // apiUrl = 'http://127.0.0.1:8000/api/';
+  // apiUrl = 'https://pcplanner-production.up.railway.app/api/';
+  apiUrl = 'http://127.0.0.1:8000/api/';
 
   constructor(protected http: HttpClient) { }
 
@@ -21,12 +21,9 @@ export class BuilderService {
     return this.http.post<Preferences>(this.apiUrl + 'preferences/', { budget, chipset, need_wifi, usage })
   }
 
-  // getAIResponses(): Observable<AIResponse[]> {
-  //   return this.http.get<AIResponse[]>(this.apiUrl + 'chatresponses');
-  // }
 
-  createAIResponse(components: computerComponent[]): Observable<any> {
-    return this.http.post<any>(this.apiUrl + 'chatresponses/',{ components })
+  createAIResponse(computer_id: number, userPrompt: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'chatresponses/',{ computer_id, userPrompt })
   }
 
   createComputer(preferences_id: number): Observable<Computer> {
