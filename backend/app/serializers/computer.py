@@ -23,6 +23,7 @@ class ComputerSerializer(ModelSerializer):
             "name",
             "components",
             "total_price",
+            "aiResponse"
         ]
 
     def get_components(self, obj):

@@ -29,6 +29,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { EasyBuilderComponent } from './easy-builder/easy-builder.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 @NgModule({ declarations: [
         AppComponent,
@@ -57,7 +58,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatStepperModule,
         MatListModule,
         MatSidenavModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        MatAutocompleteModule
     ], providers: [
         provideAnimationsAsync(),
         provideHttpClient(withInterceptorsFromDi())

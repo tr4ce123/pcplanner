@@ -21,12 +21,9 @@ export class BuilderService {
     return this.http.post<Preferences>(this.apiUrl + 'preferences/', { budget, chipset, need_wifi, usage })
   }
 
-  // getAIResponses(): Observable<AIResponse[]> {
-  //   return this.http.get<AIResponse[]>(this.apiUrl + 'chatresponses');
-  // }
 
-  createAIResponse(components: computerComponent[]): Observable<any> {
-    return this.http.post<any>(this.apiUrl + 'chatresponses/',{ components })
+  createAIResponse(computer_id: number, userPrompt: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'chatresponses/',{ computer_id, userPrompt })
   }
 
   createComputer(preferences_id: number): Observable<Computer> {

@@ -13,8 +13,9 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
         style({ opacity: 0 }),
         animate('1s', style({ opacity: 1 }))
       ])
-    ])
-  ]
+    ]),
+  ],
+  
 
 })
 export class LandingPageComponent {

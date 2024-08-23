@@ -46,6 +46,7 @@ class Computer(models.Model):
         Component, on_delete=models.CASCADE, related_name="case_computers", null=True
     )
     total_price = models.FloatField(null=True, blank=True)
+    aiResponse = models.CharField(null=True, blank=True)
 
     # Custome save method that calculates the total price before the model is actually saved into the database
     def save(self, *args, **kwargs):
