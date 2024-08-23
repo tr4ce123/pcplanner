@@ -132,7 +132,7 @@
                 </div>
             </div>
     
-        <div *ngIf="computer.aiResponse" class="ai-insights-container">
+        <div *ngIf="computer.aiResponse" class="ai-insights-container" @fadeIn>
             <h2 class="insights-title">AI Insights</h2>
             <div *ngIf="typedText.length > 0" class="typewriter-text">
                 <p>{{ typedText }}</p>
