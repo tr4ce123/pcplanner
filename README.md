@@ -23,7 +23,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/tr4ce123/pcplanner">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/PCPlannerlogo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">PCPlanner</h3>
