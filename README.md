@@ -58,7 +58,9 @@
     </li> -->
     <li><a href="#usage">Usage</a></li>
       <ul>
-        <li><a href="#Easy-Builder-Feature">Easy Builder</a></li>
+        <li><a href="#easy-builder-feature">Easy Builder</a></li>
+        <li><a href="#builder-feature">Builder</a></li>
+        <li><a href="#ai-insights-feature">AI Insights</a></li>
       </ul>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
