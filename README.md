@@ -146,7 +146,7 @@ This is an example of how to list things you need to use the software and how to
 
 ### Easy Builder Feature
 
-The purpose of this component is to well... make an easy build. 
+The purpose of this component is, well... to make an easy build. 
 
 ![easy-builder-page]
 
@@ -162,6 +162,12 @@ After waiting a second or two, your custom build will appear. This component pro
 
 
 ### Builder Feature
+
+The Builder feature is very similar, but it adds a layer of complexity. Users are allowed to include additional criteria for the computer they want generated.
+
+First, navigate to `pcplanner.com/builder` and again, make sure to read the notes at the top! They really are important.
+
+Fill out the form 
 
 ### AI Insights Feature
 
