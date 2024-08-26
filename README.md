@@ -70,10 +70,21 @@
 
 [![Landing Page][landing-page]](https://thepcplanner.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+### Key Features
+
+- **Smart Budgeting:** Enter your budget, and PCPlanner will recommend the best components that fit within your price range, ensuring you get the most value for your money.
+- **Easy Builder Mode:** For beginners, the Easy Builder allows you to input your budget and get instant recommendations without the need to specify complex options.
+- **Advanced Customization:** For those who want more control, the Builder mode lets you choose specifications such as chipset, usage, and network options to fine-tune your build.
+- **AI-Powered Insights:** Ask ChatGPT for advice and insights on your build, including trade-offs and future-proofing tips, ensuring you make informed decisions.
+- **Extensive Database:** PCPlanner uses an algorithm to search through over 3,000 components, making the process of finding the right parts quick and accurate.
+
+### Project Goals
+
+The primary goal of PCPlanner is to simplify the PC building experience by taking away the countless hours of searching required to find the best components for your budget. I wanted to create a website that is visually appealing and, more importantly, has fluid and easy user experience. PCPlanner should be an easy to use tool that gives quality reccomendations rather than being a marketing scheme. Many websites like the one I have created exist, but they simply reccomend a pre-set list of parts rather than dynamically sifting through a database of components.
+
+This project aims to elimate the confusion for new, and even experienced users by offering a real list of compatible components by simply entering your budget.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ### Built With
@@ -131,11 +142,29 @@ This is an example of how to list things you need to use the software and how to
 
 
 
-<!-- USAGE EXAMPLES 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
--->
+### Easy Builder Feature
+
+The purpose of this component is to well... make an easy build. 
+
+![easy-builder-page]
+
+First, navigate to `pcplanner.com/easybuilder` and make sure to read the notes at the top! They are important for understanding the time the components were added. Scroll down until you see the form to enter your budget.
+
+![enter-budget]
+
+Simply enter your budget as a plain integer and click the `Create My PC` button.
+
+![custom-build]
+
+After waiting a second or two, your custom build will appear. This component provides all of the information you need to build the PC and buy the parts. The `Buy Now` button links to the pcpartpicker link where you can see the full list of specs and pricing. 
+
+
+### Builder Feature
+
+### AI Insights Feature
+
 
 
 
@@ -203,11 +232,15 @@ Project Link: [https://github.com/tr4ce123/pcplanner](https://github.com/tr4ce12
 [stars-url]: https://github.com/github_username/repo_name/stargazers
 [issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
 [issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/tr4ce123/pcplanner/blob/tr4ce123-patch-1/LICENSE
+[license-shield]: https://img.shields.io/github/license/tr4ce123/pcplanner.svg?style=for-the-badge
+[license-url]: https://github.com/tr4ce123/pcplanner/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/gglasby04
 [landing-page]: images/LandingPage.png
+[easy-builder-page]: images/EasyBuilderPage.png
+[enter-budget]: images/EnterBudget.png
+[custom-build]: images/CustomBuild.png
+
 
 <!-- Badge Links -->
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
