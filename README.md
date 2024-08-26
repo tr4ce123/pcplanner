@@ -167,11 +167,40 @@ The Builder feature is very similar, but it adds a layer of complexity. Users ar
 
 First, navigate to `pcplanner.com/builder` and again, make sure to read the notes at the top! They really are important.
 
-Fill out the form 
+Now, scroll down to the preferences form at the bottom of the page. Once you complete a step on the form, you are allowed to go back and edit it however you'd like. 
+
+#### Step 1
+![form-1]
+
+First, you want to set your budget to whatever you feel comfortable paying.
+
+#### Step 2
+![form-2]
+
+Next, specify whether you want to use your PC for gaming, or productivity.
+
+#### Step 3
+![form-3]
+
+Then, choose between Intel and AMD for your brand of CPU. Either one works here and you can research the difference between the two.
+
+#### Step 4
+![form-4]
+
+For the fourth step, specify whether you need to connect to WiFi. Some motherboards are not equipped with the necessary parts to connect to the internet wirelessly.
+
+#### Step 5
+![form-5]
+Finally, submit your form by pressing the button
+
+#### Your Build
+![custom-build2]
+Your results should pop up in a few seconds or less and here is the PC that best matches the given preferences!
 
 ### AI Insights Feature
 
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- ROADMAP -->
@@ -246,6 +275,13 @@ Project Link: [https://github.com/tr4ce123/pcplanner](https://github.com/tr4ce12
 [easy-builder-page]: images/EasyBuilderPage.png
 [enter-budget]: images/EnterBudget.png
 [custom-build]: images/CustomBuild.png
+[custom-build2]: images/CustomBuild2.png
+[form-1]: images/BuilderForm1.png
+[form-2]: images/BuilderForm2.png
+[form-3]: images/BuilderForm3.png
+[form-4]: images/BuilderForm4.png
+[form-5]: images/BuilderForm5.png
+
 
 
 <!-- Badge Links -->
