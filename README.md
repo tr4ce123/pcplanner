@@ -204,6 +204,15 @@ Your results should pop up in a few seconds or less and here is the PC that best
 
 ### AI Insights Feature
 
+The AI Insights section acts as an agent to interact with ChatGPT's 4o model. Once you click the `Build Insights with AI` button, you will see a form pop up as shown below.
+
+![insights]
+![insights-form]
+
+This form allows you to type any query you want to ask ChatGPT about your component selection and it even has some suggested questions. These questions have autocorrect that filters them as an option or not as the user is typing. When you're done with the form, submit it.
+
+![insights-section]
+You should see this text be generated with a typing animation and it will show you the response!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -285,7 +294,9 @@ Project Link: [https://github.com/tr4ce123/pcplanner](https://github.com/tr4ce12
 [form-3]: images/BuilderForm3.png
 [form-4]: images/BuilderForm4.png
 [form-5]: images/BuilderForm5.png
-
+[insights]: images/Insights.png
+[insights-form]: images/InsightsForm.png
+[insights-section]: images/InsightsSection.png
 
 
 <!-- Badge Links -->
