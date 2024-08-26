@@ -155,7 +155,7 @@ The purpose of this component is, well... to make an easy build.
 
 ![easy-builder-page]
 
-First, navigate to `pcplanner.com/easybuilder` and make sure to read the notes at the top! They are important for understanding the time the components were added. Scroll down until you see the form to enter your budget.
+First, navigate to `thepcplanner.com/easybuilder` and make sure to read the notes at the top! They are important for understanding the time the components were added. Scroll down until you see the form to enter your budget.
 
 ![enter-budget]
 
