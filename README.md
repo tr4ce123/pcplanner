@@ -229,7 +229,7 @@ You should see this text be generated with a typing animation and it will show y
   - [ ] About Page: In progress
 - [x] Builder / Easy Builder
   - [x] Create preferences form
-  - [x] Implement backend reccomendation algorithm
+  - [x] Implement backend recommendation algorithm
 - [x] ChatGPT Integration
   - [x] Backend API integration
   - [x] AI insights section
