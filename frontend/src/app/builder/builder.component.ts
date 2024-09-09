@@ -168,6 +168,10 @@ export class BuilderComponent implements OnInit{
       this.chipsetFormGroup.valid &&
       this.wifiFormGroup.valid
     ) {
+      if (this.budgetFormGroup.value.budget < 600) {
+        this.snackBar.open('Error: Budget must be over $600');
+        return
+      }
       const budget = this.budgetFormGroup.value.budget;
       const chipset = this.chipsetFormGroup.value.chipset;
       const need_wifi = this.wifiFormGroup.value.need_wifi;

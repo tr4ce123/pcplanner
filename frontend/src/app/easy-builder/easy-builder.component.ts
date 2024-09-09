@@ -122,6 +122,10 @@ export class EasyBuilderComponent implements OnInit{
   onSubmit(): void {
     if (this.budgetFormGroup.valid) {
       const budget = this.budgetFormGroup.value.budget;
+      if (budget < 600) {
+        this.snackBar.open('Error: Budget must be over $600');
+        return
+      }
     
       this.builderService.createPreference(budget, null, null, null).subscribe({
         next: (newPreference: Preferences) => {
@@ -129,7 +133,7 @@ export class EasyBuilderComponent implements OnInit{
     
           this.builderService.createComputer(newPreference.id!).subscribe({
             next: () => {
-              this.justCreated = true; // Set flag to true when a new computer is created
+              this.justCreated = true;
               this.getComputers();
               this.snackBar.open('Computer created successfully!', '', { duration: 2000 });
             },
@@ -226,8 +230,6 @@ export class EasyBuilderComponent implements OnInit{
       });
     }
   }
-
-  
 
   private scrollToNewComputer(): void {
     const computerComponents = document.querySelectorAll('.custom-pc-container');
