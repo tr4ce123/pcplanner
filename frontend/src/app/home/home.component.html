@@ -26,7 +26,7 @@
 <div class="how-it-works">
     <div class="content">
       <h1>How It Works</h1>
-      <div class="step" @fadeIn *ngIf="isVisibleStep1" id="step1">
+      <div class="step" @fadeIn id="step1">
         <div class="step-number">
           <span>1</span>
         </div>
@@ -35,7 +35,7 @@
           <p>Start by entering your budget for the PC build. We'll recommend components that fit your price range.</p>
         </div>
       </div>
-      <div class="step" @fadeIn *ngIf="isVisibleStep2" id="step2">
+      <div class="step" @fadeIn id="step2">
         <div class="step-number">
           <span>2</span>
         </div>
@@ -44,13 +44,22 @@
           <p>Choose your preferred brand, performance level, and other specifications to customize your PC build.</p>
         </div>
       </div>
-      <div class="step" @fadeIn *ngIf="isVisibleStep3" id="step3">
+      <div class="step" @fadeIn id="step3">
         <div class="step-number">
           <span>3</span>
         </div>
         <div class="step-details">
           <h3>Get Your Recommendations</h3>
           <p>Based on your budget and preferences, we'll provide you with a list of recommended components for your PC build.</p>
+        </div>
+      </div>
+      <div class="step" @fadeIn id="step4">
+        <div class="step-number">
+          <span>4</span>
+        </div>
+        <div class="step-details">
+          <h3>Ask ChatGPT</h3>
+          <p>For insights on your PC build, ask the integrated ChatGPT model anything about your build.</p>
         </div>
       </div>
     </div>

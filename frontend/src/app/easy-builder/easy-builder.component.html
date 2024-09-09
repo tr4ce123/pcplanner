@@ -49,9 +49,11 @@
             </div>
         </div>
 
-    <div *ngIf="computer.aiResponse">
-        <h2 class="insights-title">AI Insights:</h2>
-        <p>{{computer.aiResponse}}</p>
+    <div *ngIf="computer.aiResponse" class="ai-insights-container" @fadeIn>
+        <h2 class="insights-title">AI Insights</h2>
+        <div *ngIf="typedText.length > 0" class="typewriter-text">
+            <p>{{ typedText }}</p>
+          </div>
     </div>
     <div class="custom-pc-footer">
         <span class="total-price">Total Price: ${{ computer.total_price }}</span>

@@ -60,6 +60,12 @@ export class BuilderComponent implements OnInit{
   showAIForm: boolean = false;
   isFormLoading: boolean = false;
 
+  aiResponseText: string = '';
+  typedText: string = '';
+  private currentIndex = 0;
+  private typingSpeed = 10;
+
+
   options: string[] = [
     'What are some changes you would suggest?', 
     'How can I ensure my computer is future proofed?', 
@@ -162,6 +168,10 @@ export class BuilderComponent implements OnInit{
       this.chipsetFormGroup.valid &&
       this.wifiFormGroup.valid
     ) {
+      if (this.budgetFormGroup.value.budget < 600) {
+        this.snackBar.open('Error: Budget must be over $600');
+        return
+      }
       const budget = this.budgetFormGroup.value.budget;
       const chipset = this.chipsetFormGroup.value.chipset;
       const need_wifi = this.wifiFormGroup.value.need_wifi;
@@ -201,10 +211,26 @@ export class BuilderComponent implements OnInit{
 
   }
 
+  displayAIResponseWithTypewriter(response: string): void {
+    this.aiResponseText = response;
+    this.currentIndex = 0; 
+    this.typedText = ''; 
+    this.typeWriterEffect();
+  }
+
+  private typeWriterEffect(): void {
+    if (this.currentIndex < this.aiResponseText.length) {
+      this.typedText += this.aiResponseText.charAt(this.currentIndex);
+      this.currentIndex++;
+      setTimeout(() => this.typeWriterEffect(), this.typingSpeed);
+    }
+  }
+
   submitAIRequest(computer: Computer): void {
     if (this.aiForm.valid) {
       const userPrompt = this.aiForm.value.userPrompt;
       this.isFormLoading = true;
+      this.aiForm.reset();
       this.builderService.createAIResponse(computer.id, userPrompt).subscribe({
         next: response => {
           const formattedResponse = this.formatAIResponse(response.chat_response.response);
@@ -217,9 +243,12 @@ export class BuilderComponent implements OnInit{
           this.snackBar.open('Insights generated!', '', { duration: 2000 });
           this.toggleAIForm(computer);
           this.isFormLoading = false;
+          this.displayAIResponseWithTypewriter(formattedResponse);
+
         },
         error: () => {
           this.snackBar.open('Failed to generate insights!', '', { duration: 2000 });
+          this.isFormLoading = false;
         }
       });
     }
